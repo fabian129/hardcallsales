@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0d0d0d;
+  --foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  /* HCS Pencil Tokens */
+  --color-hcs-navy-900: #0d0d0d;
+  --color-hcs-navy-800: #121212;
+  --color-hcs-navy-700: #1a1a1a;
+  --color-hcs-navy-600: #242424;
+  --color-hcs-line: #2b2b2b;
+  --color-hcs-line-accent: rgba(120, 81, 169, 0.35);
+
+  /* HCS Canonical Purple (#7851A9) */
+  --color-hcs-accent: #7851a9;
+  --color-hcs-accent-hover: #8f6bc1;
+  --color-hcs-accent-soft: rgba(120, 81, 169, 0.12);
+  --color-hcs-accent-glow: rgba(120, 81, 169, 0.25);
+  --color-hcs-accent-ink: #ffffff;
+
+  /* Typography Colors */
+  --color-hcs-text: #ffffff;
+  --color-hcs-text-muted: #a8a8a8;
+  --color-hcs-text-faint: #6e6e6e;
+
+  /* Light Paper & Card Surfaces */
+  --color-hcs-paper: #fafafa;
+  --color-hcs-paper-2: #f2f2f2;
+  --color-hcs-card: #ffffff;
+  --color-hcs-ink: #0f0f0f;
+  --color-hcs-ink-muted: #6e6e6e;
+  --color-hcs-border-light: #e6e6e6;
+
+  /* Radii */
+  --radius-hcs-sm: 10px;
+  --radius-hcs-md: 16px;
+  --radius-hcs-lg: 24px;
+  --radius-hcs-pill: 9999px;
+}
+
+body {
+  background-color: #fafafa;
+  color: #0f0f0f;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Chamfer Cut Button (Diagonal 45deg cut on bottom-right) */
+.btn-chamfer {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  border-radius: 6px 6px 0 6px;
+}
+
+.btn-chamfer-sm {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
+  border-radius: 5px 5px 0 5px;
+}
+
+.btn-chamfer-lg {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+  border-radius: 8px 8px 0 8px;
+}
+
+/* Clean Glassmorphism Classes (No purple tint) */
+.glass-dark {
+  background: rgba(17, 17, 17, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-dark-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2b2b2b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7851a9;
+}
+
