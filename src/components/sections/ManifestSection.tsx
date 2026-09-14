@@ -29,10 +29,10 @@ export const ManifestSection: React.FC = () => {
             <Reveal delay={0.1} yOffset={20}>
               <div className="text-2xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-normal font-sans leading-[1.22] tracking-[-1.3px] mb-10 text-[#0F0F0F]">
                 <span className="font-semibold text-[#0F0F0F]">
-                  Vi bokar möten med beslutsfattare som faktiskt kan säga ja.
+                  Vi bokar möten med beslutsfattarna våra konkurrenter aldrig når.
                 </span>{" "}
                 <span className="text-[#8E8E8E]">
-                  Ingen egen SDR-funktion, ingen uppstartstid — bara möten i kalendern och affärer som stänger.
+                  LinkedIn och e-post identifierar köpintentionen. Våra säljare tar över på telefon och förvandlar intresset till kvalificerade möten direkt i er kalender.
                 </span>
               </div>
             </Reveal>

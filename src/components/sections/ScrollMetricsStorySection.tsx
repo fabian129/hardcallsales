@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/Button";
+import { AuraBackground } from "@/components/ui/AuraBackground";
 
 interface MetricStep {
   number: string;
@@ -39,8 +40,7 @@ export const ScrollMetricsStorySection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
   
-  // EventPartner DarkZone-stil: Börjar ljust (#FBFBFC) med tomt innehåll, släcker och tänder när man scrollar in
-  const [darkProgress, setDarkProgress] = useState(1);
+  // Kontinuerlig reveal-effekt när sektionen scrollas in
   const [revealProgress, setRevealProgress] = useState(1);
 
   useEffect(() => {
@@ -49,17 +49,12 @@ export const ScrollMetricsStorySection: React.FC = () => {
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // 1. Bakgrunden släcker i EXAKT samma takt som sektionen ovanför (100% synk):
-      // rect.top === rect1.bottom vid varje enskild scroll-pixel
+      // 1. Tändning & Blur: Startar när sektionen närmar sig så innehållet mjukt glider in
       const distance = windowHeight - rect.top;
-      const dim = Math.min(1, Math.max(0, distance / (windowHeight * 0.22)));
-      setDarkProgress(dim);
-
-      // 2. Tändning & Blur: Startar direkt från början så att innehållet blurrar in omedelbart
-      const reveal = Math.min(1, Math.max(0, distance / (windowHeight * 0.45)));
+      const reveal = Math.min(1, Math.max(0, distance / (windowHeight * 0.35)));
       setRevealProgress(reveal);
 
-      // 3. Bläddring genom de 3 metriksen när sektionen är fastlåst (rect.top <= 0)
+      // 2. Bläddring genom de 3 metriksen när sektionen är fastlåst (rect.top <= 0)
       const totalScrollable = rect.height - windowHeight;
       if (totalScrollable <= 0) return;
 
@@ -81,16 +76,24 @@ export const ScrollMetricsStorySection: React.FC = () => {
     <section
       id="siffrorna"
       ref={sectionRef}
-      className="relative w-full h-[300vh] bg-[#FBFBFC] text-white"
+      className="relative w-full h-[300vh] bg-[#050505] text-white select-none"
     >
-      {/* ── BAKGRUNDSDIMMER: Börjar helt ljus (#FBFBFC) och släcker snabbt till #050505 när man rullar in ── */}
-      <div 
-        className="absolute inset-0 bg-[#050505] transition-opacity duration-75 ease-out pointer-events-none z-0"
-        style={{ opacity: darkProgress }}
-      />
-
       {/* ── STICKY VIEWPORT CONTAINER (Låser fast så du inte swishar förbi) ── */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center z-10">
+
+        {/* ── 1. ARCHITECTURAL GRID: 4 diskreta vertikala linjer som fortsätter från sektionen innan ── */}
+        <div className="absolute inset-0 pointer-events-none select-none z-0 max-w-[1760px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 h-full">
+          <div className="border-r border-white/[0.04] h-full hidden lg:block" />
+          <div className="border-r border-white/[0.04] h-full hidden lg:block" />
+          <div className="border-r border-white/[0.04] h-full hidden lg:block" />
+          <div className="h-full hidden lg:block" />
+        </div>
+
+        {/* ── 2. JORDGLOBENS AURA FRÅN SEKTIONEN INNAN (UnicornStudio World Aura) ── */}
+        <AuraBackground projectId="yWZ2Tbe094Fsjgy9NRnD" opacity={0.32} speedScale={0.25} className="scale-105 blur-[1px]" />
+
+        {/* ── 3. MJUKA VINJETTER OCH TOPP/BOTTEN FADE MOT SVÄRTA ── */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-[#050505]/80 pointer-events-none z-[1]" />
 
         {/* ── EXPANDED CONTAINER WITH LUXURIOUS HEADROOM BENEATH NAVBAR ── */}
         <div className="relative z-10 w-full max-w-[1760px] h-full mx-auto px-6 sm:px-12 lg:px-16 xl:px-20 flex flex-col justify-between pt-28 sm:pt-32 lg:pt-36 pb-8 sm:pb-12 lg:pb-14">

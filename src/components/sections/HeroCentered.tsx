@@ -51,10 +51,10 @@ export const HeroCentered: React.FC = () => {
             </h1>
           </Reveal>
 
-          {/* Subheadline (V1 Editorial Copy in Pure White) */}
+          {/* Subheadline (Pontus Feedback: LinkedIn, e-post och telefonuppföljning) */}
           <Reveal delay={0.3} yOffset={20}>
             <p className="text-base sm:text-lg lg:text-[20px] text-white font-normal leading-[1.6] max-w-2xl mb-8 sm:mb-10 text-white/95">
-              Vi når beslutsfattare oavsett bransch och geografi — 100+ miljoner via LinkedIn. Du slipper bygga en egen SDR-funktion.
+              Vi kombinerar LinkedIn, e-post och personlig telefonuppföljning för att identifiera köpintention – och bokar endast möten med beslutsfattare som faktiskt visat intresse för det ni säljer.
             </p>
           </Reveal>
 

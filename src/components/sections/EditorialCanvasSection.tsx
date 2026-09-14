@@ -147,14 +147,14 @@ export const EditorialCanvasSection: React.FC = () => {
             </div>
 
             <h2 className="text-3xl sm:text-5xl lg:text-[62px] xl:text-[70px] font-normal text-[#0A0A0A] leading-[1.1] sm:leading-[1.05] tracking-[-0.03em]">
-              Vi bokar möten med beslutsfattare som{" "}
+              Vi bokar möten med{" "}
               <span className="text-neutral-400 font-normal">
-                faktiskt kan säga ja.
+                beslutsfattarna våra konkurrenter aldrig når.
               </span>
             </h2>
 
             <p className="mt-4 sm:mt-6 text-base sm:text-xl text-neutral-600 font-normal leading-relaxed max-w-xl tracking-tight">
-              Ingen egen SDR-funktion, ingen uppstartstid — bara kvalificerade möten i kalendern och affärer som stänger.
+              LinkedIn och e-post identifierar köpintentionen. Våra säljare tar över på telefon och förvandlar intresset till kvalificerade möten direkt i er kalender.
             </p>
           </div>
 

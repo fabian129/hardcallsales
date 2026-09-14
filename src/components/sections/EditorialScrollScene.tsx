@@ -25,8 +25,8 @@ export const HCS_STEPS: EditorialStep[] = [
     id: "manifest",
     stepNumber: "01",
     badge: "MANIFEST",
-    headline: "Vi bokar möten med beslutsfattare som faktiskt kan säga ja.",
-    ingress: "Ingen egen SDR-funktion, ingen uppstartstid — bara kvalificerade möten i kalendern och affärer som stänger.",
+    headline: "Vi bokar möten med beslutsfattarna våra konkurrenter aldrig når.",
+    ingress: "LinkedIn och e-post identifierar köpintentionen. Våra säljare tar över på telefon och förvandlar intresset till kvalificerade möten direkt i er kalender.",
     card: { quote: "”Hard Call Sales har levererat över 20 MSEK i nya affärer för oss.”", author: "Mattias Holm, Säljchef på AVEVA", tag: ">20 MSEK LEVERERAT" },
   },
   {
