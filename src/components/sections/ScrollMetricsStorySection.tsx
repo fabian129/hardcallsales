@@ -103,26 +103,6 @@ export const ScrollMetricsStorySection: React.FC = () => {
             {/* ════ LEFT ZONE (~28-30%): Portrait full height, edge on white line, hair at eyebrow ════ */}
             <div className="w-full lg:w-[30%] xl:w-[28%] shrink-0 lg:border-r border-white/10 lg:pr-10 xl:pr-14 flex flex-col justify-between relative">
               
-              {/* ── BACKGROUND PORTRAIT: Full section height, right edge locked to white line, tänder i svärtan ── */}
-              <div className="absolute -top-32 sm:-top-36 lg:-top-44 -bottom-12 sm:-bottom-16 lg:-bottom-20 -left-28 sm:-left-36 lg:-left-56 xl:-left-72 right-0 pointer-events-none select-none z-0 overflow-hidden flex items-center justify-end">
-                <div 
-                  className="relative w-full h-full flex items-center justify-end translate-y-16 sm:translate-y-20 lg:translate-y-28 scale-[0.88] origin-top-right transition-all duration-500 ease-out"
-                  style={{
-                    opacity: revealProgress,
-                    transform: `translateY(${28 + (1 - revealProgress) * 20}px) scale(0.88)`,
-                  }}
-                >
-                  <img
-                    src="/images/hero-profile-framed.jpg"
-                    alt="Hard Call Sales Nätverk"
-                    className="w-full h-full object-cover object-[right_top] grayscale contrast-[1.25] brightness-[0.95] opacity-90 transition-all duration-700"
-                  />
-                  {/* Soft organic top, bottom and outer edge fades to pure #050505 */}
-                  <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#050505] via-[#050505]/40 to-transparent pointer-events-none" />
-                  <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-transparent pointer-events-none" />
-                  <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#050505] to-transparent pointer-events-none" />
-                </div>
-              </div>
 
               {/* Tag in top-left with matching line height (tänds mjukt) */}
               <div 

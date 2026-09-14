@@ -35,8 +35,10 @@
 | 3 | M3: ManifestSection Polish & TS Fix | `src/components/sections/ManifestSection.tsx`, `src/components/ui/AuraBackground.tsx` | none | IN_PROGRESS |
 | 4 | M4: Final Verification & Build Gate | Full application build & gate checks | M1, M2, M3 | PLANNED |
 
-## Code Layout
-- `src/components/sections/ContactSplitSection.tsx` — Owned by Worker 1 / M1
-- `src/components/sections/CommunityFooter.tsx` — Owned by Worker 2 / M2
-- `src/components/sections/ManifestSection.tsx` — Owned by Worker 3 / M3
-- `src/components/ui/AuraBackground.tsx` — Owned by Worker 3 / M3
+## Pontus & Fabian Feedback Roadmap
+- [x] CaseStoriesSection: Riktiga kundlogotyper (AVEVA, Monster, IDNet, Wall to Wall, Allt om Juridik, Milient) inlagda i kundcase-korten
+- [x] ScrollMetricsStorySection: Porträttet på mannen ("gubben") borttaget; ren bakgrund med jordglobens aura
+- [x] Jobba hos oss: "Distans" tillagt i Slot 02 Önskad placering, och tidigare Slot 03 & 05 borttagna för snabbare ansökningsflöde
+- [x] Ledning & Team: Alla 6 nyckelpersoner från hardcallsales.se/about-1 (Malin, Pontus, Joakim Ström, Johanna Glaad, Joakim Lundin, Kevin Eriksson) inlagda i kortsektionen och med undersidor
+- [ ] TODO: Fortlöpande finjustering av individuella kalenderlänkar och fördjupade citat för Johanna Glaad och Joakim Lundin vid önskemål från Pontus/ledningen
+

@@ -74,6 +74,54 @@ const LEADERS_DATA: Record<string, LeaderData> = {
       description: "Se hur vi tränar våra säljare att hantera era mest komplexa invändningar i skarpa B2B-samtal.",
     },
   },
+  johanna: {
+    name: "Johanna Glaad",
+    role: "Team Lead & Senior Mötesbokare",
+    tagline: "Leder dagliga SDR-team och driver kvalitet och show-rate mot nordiska enterprise-konton.",
+    image: "/images/team/portrait-johanna.png",
+    linkedin: "https://www.linkedin.com/in/johanna-glaad-635288156/",
+    fullBio: [
+      "Johanna leder våra operativa säljteam och kvalitetssäkrar att varje bokat möte uppfyller kundens exakta kravprofil.",
+      "Med djup erfarenhet av kvalificerad B2B-prospektering säkerställer hon hög närvaro (show-rate) och strukturerad överlämning till kundernas säljare.",
+    ],
+    specialty: ["SDR Team Leadership", "Kvalitetsstyrning & Show-rate", "Enterprise Onboarding"],
+    meetingCta: {
+      title: "Boka möte med Johanna",
+      description: "Diskutera hur våra säljteam matchar er målgrupp och hur uppstartsprocessen ser ut.",
+    },
+  },
+  lundin: {
+    name: "Joakim Lundin",
+    role: "Senior Mötesbokare & Key Account",
+    tagline: "Specialist på komplex B2B-mötesbokning mot VD, IT-chefer och industriella beslutsfattare.",
+    image: "/images/team/portrait-lundin.png",
+    linkedin: "https://www.linkedin.com/in/joakim-lundin-44b76410b/",
+    fullBio: [
+      "Joakim har mångårig erfarenhet av att etablera kontakt med svåråtkomliga C-level-beslutsfattare inom tech och industri.",
+      "Han kombinerar teknisk förståelse med stark affärskommunikation och har genererat betydande pipeline-värde för HCS kunder.",
+    ],
+    specialty: ["C-Level Outreach", "Industriell Tech & IT", "Pipeline-generering"],
+    meetingCta: {
+      title: "Boka möte med Joakim",
+      description: "Hör hur vi tar oss förbi grindvakter och når de högsta beslutsfattarna i er bransch.",
+    },
+  },
+  kevin: {
+    name: "Kevin Eriksson",
+    role: "Senior Mötesbokare & SDR",
+    tagline: "Specialist på datadriven outreach och snabb mötesbokning mot nordiska beslutsfattare.",
+    image: "/images/team/portrait-kevin.png",
+    linkedin: "https://www.linkedin.com/in/kevin-eriksson-b4b401112/",
+    fullBio: [
+      "Kevin har varit en central del av HCS leveransteam och har bokat hundratals affärskritiska möten för ledande IT- och SaaS-bolag.",
+      "Med skarp samtalsmetodik och hög aktivitetsnivå omsätter han kalla kontakter till bokade säljmöten från dag ett.",
+    ],
+    specialty: ["Outreach & Mötesbokning", "SaaS & Mjukvara", "Snabb Pipeline-uppstart"],
+    meetingCta: {
+      title: "Boka möte med Kevin",
+      description: "Gå igenom hur snabbt vi kan komma igång och börja boka möten för ert erbjudande.",
+    },
+  },
 };
 
 export function generateStaticParams() {
@@ -81,6 +129,9 @@ export function generateStaticParams() {
     { slug: "malin" },
     { slug: "pontus" },
     { slug: "joakim" },
+    { slug: "johanna" },
+    { slug: "lundin" },
+    { slug: "kevin" },
   ];
 }
 

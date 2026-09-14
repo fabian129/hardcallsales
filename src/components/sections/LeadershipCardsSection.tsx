@@ -39,6 +39,30 @@ const LEADERS: LeaderCard[] = [
     slug: "joakim",
     avatar: "/images/team/portrait-joakim.png",
   },
+  {
+    num: "/04",
+    roleTag: "Team Lead & Senior Mötesbokare",
+    name: "Johanna Glaad",
+    desc: "Leder dagliga SDR-team och onboarding med kompromisslöst fokus på show rate och hög möteskvalitet för nordiska enterprise- och SaaS-kunder.",
+    slug: "johanna",
+    avatar: "/images/team/portrait-johanna.png",
+  },
+  {
+    num: "/05",
+    roleTag: "Senior Mötesbokare & Key Account",
+    name: "Joakim Lundin",
+    desc: "Toppsäljare med mångårig vana av komplex mötesbokning mot VD och IT-chefer inom svensk tech, industri och fastighetssektorn.",
+    slug: "lundin",
+    avatar: "/images/team/portrait-lundin.png",
+  },
+  {
+    num: "/06",
+    roleTag: "Senior Mötesbokare & SDR",
+    name: "Kevin Eriksson",
+    desc: "Specialist på datadriven outreach och snabb mötesbokning mot nordiska beslutsfattare inom IT, mjukvara och industriell tech.",
+    slug: "kevin",
+    avatar: "/images/team/portrait-kevin.png",
+  },
 ];
 
 export const LeadershipCardsSection: React.FC = () => {
@@ -114,8 +138,8 @@ export const LeadershipCardsSection: React.FC = () => {
           </div>
         </div>
 
-        {/* ── DE 3 MÖRKA KORTEN (Arkitektonisk precision) ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 relative z-20">
+        {/* ── DE 6 MÖRKA KORTEN (Arkitektonisk precision) ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-20">
           {LEADERS.map((leader, idx) => {
             const isHovered = hoveredIdx === idx;
 

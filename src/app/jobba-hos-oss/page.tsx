@@ -286,10 +286,11 @@ export default function CareersPage() {
                     <h3 className="text-lg font-medium text-white">Önskad placering</h3>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {[
                       "Stockholm (Östermalm)",
                       "Sliema, Malta (12th Floor)",
+                      "Distans",
                       "Flexibel / Öppen för båda",
                     ].map((loc) => (
                       <button
@@ -313,31 +314,10 @@ export default function CareersPage() {
                   </div>
                 </div>
 
-                {/* ── SLOT 03: Säljerfarenhet & Track Record (Stort textslot) ── */}
+                {/* ── SLOT 03: Varför söker du till Hard Call Sales? ── */}
                 <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.07]">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-xs font-mono text-neutral-400 uppercase tracking-wider">Slot 03</span>
-                    <span className="text-neutral-600">·</span>
-                    <h3 className="text-lg font-medium text-white">Din säljerfarenhet &amp; resultat</h3>
-                  </div>
-                  <p className="text-xs text-neutral-400 mb-4">
-                    Vad har du sålt tidigare? Hur många samtal eller möten har du legat på per vecka/månad? Nämn gärna konkreta siffror.
-                  </p>
-                  <textarea
-                    name="experience"
-                    rows={4}
-                    required
-                    value={formData.experience}
-                    onChange={handleChange}
-                    placeholder="Beskriv vad du gjort och dina bästa resultat..."
-                    className="w-full p-4 bg-black/40 border border-white/10 rounded-xl text-white text-sm placeholder-neutral-500 focus:outline-none focus:border-white/40 transition-colors resize-y leading-relaxed"
-                  />
-                </div>
-
-                {/* ── SLOT 04: Varför söker du till Hard Call Sales? (Stort textslot) ── */}
-                <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.07]">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-mono text-neutral-400 uppercase tracking-wider">Slot 04</span>
                     <span className="text-neutral-600">·</span>
                     <h3 className="text-lg font-medium text-white">Varför vill du arbeta här?</h3>
                   </div>
@@ -355,31 +335,10 @@ export default function CareersPage() {
                   />
                 </div>
 
-                {/* ── SLOT 05: Vad gör dig vass i kalla samtal? (Stort textslot) ── */}
+                {/* ── SLOT 04: CV / Meritförteckning ── */}
                 <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.07]">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-mono text-neutral-400 uppercase tracking-wider">Slot 05</span>
-                    <span className="text-neutral-600">·</span>
-                    <h3 className="text-lg font-medium text-white">Vad gör dig vass i telefonen?</h3>
-                  </div>
-                  <p className="text-xs text-neutral-400 mb-4">
-                    Hur resonerar du när du möter en stressad beslutsfattare som säger ”jag har inte tid” eller ”skicka ett mejl”?
-                  </p>
-                  <textarea
-                    name="strength"
-                    rows={3}
-                    required
-                    value={formData.strength}
-                    onChange={handleChange}
-                    placeholder="Din inställning och filosofi i kalla B2B-samtal..."
-                    className="w-full p-4 bg-black/40 border border-white/10 rounded-xl text-white text-sm placeholder-neutral-500 focus:outline-none focus:border-white/40 transition-colors resize-y leading-relaxed"
-                  />
-                </div>
-
-                {/* ── SLOT 06: CV / Meritförteckning (Slot) ── */}
-                <div className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.07]">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-mono text-neutral-400 uppercase tracking-wider">Slot 06</span>
+                    <span className="text-xs font-mono text-neutral-400 uppercase tracking-wider">Slot 04</span>
                     <span className="text-neutral-600">·</span>
                     <h3 className="text-lg font-medium text-white">Meritförteckning / CV</h3>
                   </div>

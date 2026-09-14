@@ -22,13 +22,23 @@ export function StoryCard({ story }: { story: typeof HCS_STORIES[0] }) {
 
       {/* Top Badges Row */}
       <div className="relative z-10 p-6 sm:p-7 flex items-center justify-between gap-4">
-        {/* Client Badge */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-black/60 backdrop-blur-xl border border-white/15 shadow-lg">
-          <span className="w-2 h-2 rounded-full bg-[#7851A9]" />
-          <span className="text-xs sm:text-[13px] font-bold text-white tracking-wider uppercase font-sans">
-            {story.client}
-          </span>
-          <span className="text-[11px] text-[#A8A8A8] font-normal border-l border-white/15 pl-2">
+        {/* Client Badge with Real Logo */}
+        <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-black/75 backdrop-blur-xl border border-white/15 shadow-lg">
+          {story.logo ? (
+            <img
+              src={story.logo}
+              alt={story.client}
+              className="h-4 sm:h-5 w-auto max-w-[100px] object-contain brightness-0 invert opacity-95"
+            />
+          ) : (
+            <div className="inline-flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#7851A9]" />
+              <span className="text-xs sm:text-[13px] font-bold text-white tracking-wider uppercase font-sans">
+                {story.client}
+              </span>
+            </div>
+          )}
+          <span className="text-[11px] text-[#A8A8A8] font-normal border-l border-white/15 pl-2.5">
             {story.industry}
           </span>
         </div>

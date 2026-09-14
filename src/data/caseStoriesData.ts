@@ -1,5 +1,6 @@
 export interface CaseStory {
   client: string;
+  logo?: string;
   industry: string;
   event: string;
   description: string;
@@ -13,9 +14,10 @@ export interface CaseStory {
   href: string;
 }
 
-export const HCS_STORIES = [
+export const HCS_STORIES: CaseStory[] = [
   {
     client: "AVEVA",
+    logo: "/images/logos/logo-aveva.png",
     industry: "Enterprise Industriell Mjukvara",
     event: "45+ C-level möten som genererade >20 MSEK i affärer",
     description:
@@ -27,6 +29,7 @@ export const HCS_STORIES = [
   },
   {
     client: "Monster",
+    logo: "/images/logos/logo-monster.png",
     industry: "B2B HR-Tech & Rekrytering",
     event: "120+ bokade möten med HR-chefer & VD över hela Norden",
     description:
@@ -38,6 +41,7 @@ export const HCS_STORIES = [
   },
   {
     client: "IDNet",
+    logo: "/images/logos/logo-idnet.png",
     industry: "Logistik & RFID-system",
     event: "85+ strategiska möten med lager- & logistikchefer",
     description:
@@ -49,6 +53,7 @@ export const HCS_STORIES = [
   },
   {
     client: "Wall to Wall Group",
+    logo: "/images/logos/logo-wall-to-wall.png",
     industry: "Fastighet & Industriell Tech",
     event: "65+ möten med kommunala & privata fastighetschefer",
     description:
@@ -60,6 +65,7 @@ export const HCS_STORIES = [
   },
   {
     client: "Allt om Juridik",
+    logo: "/images/logos/logo-allt-om-juridik.png",
     industry: "Juridiska B2B-tjänster & SaaS",
     event: "150+ företagsmöten och stark tillväxt i ARR",
     description:
@@ -70,8 +76,9 @@ export const HCS_STORIES = [
     href: "/case",
   },
   {
-    client: "NordTech Solutions",
-    industry: "IT- & Molnkonsult",
+    client: "Milient",
+    logo: "/images/logos/logo-milient.png",
+    industry: "Projekt- & Resurshantering SaaS",
     event: "28 kvalificerade möten och 3.2 MSEK i säkrad intäkt",
     description:
       "Målgruppsanpassad prospektering och personlig uppföljning mot IT-chefer i aktiv molnmigrering, vilket säkrade 6 nya ramavtal under en 3-månaders pilot.",
