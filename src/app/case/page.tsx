@@ -24,7 +24,7 @@ const CLIENT_LOGOS = [
   "Wall to Wall Group",
   "Allt om Juridik",
   "NordTech Solutions",
-  "Meetly",
+  "Bumbee Labs",
   "Vimcar",
   "SaaS Nordic",
 ];

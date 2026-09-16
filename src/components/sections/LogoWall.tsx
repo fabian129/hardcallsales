@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { Container } from "@/components/ui/Container";
 import { Hexagon, Plus } from "lucide-react";
 
@@ -26,7 +26,7 @@ export const LogoWall: React.FC = () => {
                 AVEVA
               </div>
               <div className="h-28 flex items-center justify-center font-bold tracking-tight text-lg text-[#333333] border-r border-b border-[#E6E6E6] bg-white">
-                Meetly
+                Bumbee Labs
               </div>
               <div className="h-28 flex items-center justify-center font-bold tracking-tight text-lg text-[#333333] border-r border-b border-[#E6E6E6] bg-white">
                 Wall to Wall

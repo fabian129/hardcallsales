@@ -108,7 +108,7 @@ const SCENARIOS: Scenario[] = [
             sender: "ai",
             time: "09:14:02",
             content:
-              "Hej Anna! Såg att ni skalar säljteamet för fullt efter er senaste runda. Ofta blir SDR-rekrytering och ramp-up en flaskhals när man vill ha möten i kalendern snabbt. Vi hjälpte nyligen Meetly att boka 100+ nya avtal utan att de behövde anställa ett internt SDR-team. Har du 15 minuter på torsdag kl 10:00 för en kort avstämning?",
+              "Hej Anna! Såg att ni skalar säljteamet för fullt efter er senaste runda. Ofta blir SDR-rekrytering och ramp-up en flaskhals när man vill ha möten i kalendern snabbt. Vi hjälpte nyligen Monster att boka 120+ möten mot HR-chefer & VD utan att de behövde utöka sitt interna SDR-team. Har du 15 minuter på torsdag kl 10:00 för en kort avstämning?",
             meta: "Skickad via LinkedIn InMail • Levererad",
           },
         ],

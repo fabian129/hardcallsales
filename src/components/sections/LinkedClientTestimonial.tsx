@@ -55,7 +55,7 @@ export const LinkedClientTestimonial: React.FC = () => {
                   VD & Grundare
                 </div>
                 <div className="text-xs sm:text-sm text-[#6E6E6E]">
-                  Snabbväxande SaaS-bolag i Norden (Meetly-ekosystemet)
+                  Snabbväxande nordiskt B2B SaaS-bolag
                 </div>
               </div>
 

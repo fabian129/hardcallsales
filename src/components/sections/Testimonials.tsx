@@ -33,7 +33,7 @@ export const Testimonials: React.FC = () => {
           </Link>
         </div>
 
-        {/* Featured Case Study Cards (AVEVA & Meetly) */}
+        {/* Featured Case Study Cards (AVEVA & Monster) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16">
           {CASE_STUDIES.map((cs) => (
             <div
