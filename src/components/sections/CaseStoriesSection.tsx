@@ -12,132 +12,102 @@ export function StoryCard({ story }: { story: typeof HCS_STORIES[0] }) {
 
   return (
     <div
-      className={`w-full relative rounded-[28px] overflow-hidden transition-all duration-300 border shadow-2xl flex flex-col justify-between group ${
+      className={`w-full relative rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 border flex flex-col justify-between group ${
         isOpen
-          ? "bg-[#111116] border-[#7851A9]/60 shadow-[0_0_50px_rgba(120,81,169,0.18)]"
-          : "bg-[#0E0E12] border-white/10 hover:border-white/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)]"
+          ? "bg-[#0D0D10]/95 border-white/[0.16] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_24px_50px_rgba(0,0,0,0.85)]"
+          : "bg-[#09090B]/85 hover:bg-[#0C0C0E]/90 border-white/[0.08] hover:border-white/[0.16] shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_18px_36px_rgba(0,0,0,0.7)] backdrop-blur-2xl"
       }`}
     >
-      {/* ── AMBIENT ATMOSPHERIC BACKGROUND (NO STOCK PHOTOS) ── */}
-      {/* Top-Right Purple Aura Bloom */}
-      <div
-        className={`absolute -top-20 -right-20 w-72 h-72 rounded-full pointer-events-none transition-all duration-500 blur-[80px] ${
-          isOpen ? "bg-[#7851A9]/25 scale-125" : "bg-[#7851A9]/10 group-hover:bg-[#7851A9]/18"
-        }`}
-      />
-      {/* Bottom-Left Secondary Sub-Glow */}
-      <div className="absolute -bottom-24 -left-24 w-60 h-60 rounded-full bg-purple-950/20 blur-[70px] pointer-events-none" />
-
-      {/* Subtle Precision Dot Matrix Background */}
-      <svg
-        className="absolute inset-0 w-full h-full opacity-[0.035] pointer-events-none select-none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <pattern id={`dot-matrix-${story.id}`} width="28" height="28" patternUnits="userSpaceOnUse">
-            <circle cx="14" cy="14" r="1.2" fill="#FFFFFF" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill={`url(#dot-matrix-${story.id})`} />
-      </svg>
-
-      {/* Top Border Hairline Highlight */}
-      <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
-
       {/* ── CARD HEADER & LOGO PODIUM ── */}
-      <div className="relative z-10 p-6 sm:p-7 flex items-center justify-between gap-4 border-b border-white/[0.06]">
-        {/* Architectural Emblem Badge with Authentic Client Logo */}
-        <div className="inline-flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/[0.1] shadow-inner">
+      <div className="relative z-10 px-6 py-5 sm:px-7 sm:py-6 flex items-center justify-between gap-4 border-b border-white/[0.05]">
+        {/* Authentic White Client Logo & Industry */}
+        <div className="flex items-center gap-3.5">
           {story.logo ? (
             <img
               src={story.logo}
               alt={story.client}
-              className="h-4 sm:h-5 w-auto max-w-[110px] object-contain brightness-0 invert opacity-95 group-hover:opacity-100 transition-opacity"
+              className="h-5 sm:h-5.5 w-auto max-w-[120px] object-contain brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity"
             />
           ) : (
-            <div className="inline-flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#7851A9]" />
-              <span className="text-xs sm:text-[13px] font-bold text-white tracking-wider uppercase font-sans">
-                {story.client}
-              </span>
-            </div>
+            <span className="text-xs sm:text-[13px] font-medium text-white tracking-wider uppercase font-sans">
+              {story.client}
+            </span>
           )}
-          <span className="text-[11px] text-[#A8A8A8] font-normal border-l border-white/15 pl-2.5 font-sans">
+          <span className="w-[1px] h-3.5 bg-white/[0.12] hidden sm:inline-block" />
+          <span className="text-[11px] text-neutral-400 font-mono tracking-wide uppercase hidden sm:inline-block">
             {story.industry}
           </span>
         </div>
 
-        {/* Quick Key Stat Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#7851A9]/20 backdrop-blur-md border border-[#7851A9]/40 text-white font-mono text-xs font-semibold shrink-0">
-          <TrendingUp size={13} className="text-[#B794F4]" />
+        {/* Quiet Key Stat Badge (Smoked Glass) */}
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-white font-mono text-xs font-medium shrink-0">
+          <TrendingUp size={12} className="text-neutral-300" />
           <span>{story.stats.primary}</span>
         </div>
       </div>
 
       {/* ── CARD BODY ── */}
-      <div className="relative z-10 p-6 sm:p-8 flex flex-col justify-between flex-1">
+      <div className="relative z-10 p-6 sm:p-7 flex flex-col justify-between flex-1">
         <div>
-          {/* Metric Chips Row */}
-          <div className="flex flex-wrap items-center gap-2 mb-3.5">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.06] border border-white/[0.08] backdrop-blur-md text-[11px] font-medium text-white/90">
-              <CheckCircle2 size={12} className="text-[#7851A9]" />
-              <span>{story.stats.secondary}</span>
-            </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.06] border border-white/[0.08] backdrop-blur-md text-[11px] font-medium text-white/90">
-              <CheckCircle2 size={12} className="text-[#7851A9]" />
-              <span>{story.stats.metric}</span>
-            </div>
+          {/* Subtle Monospace Metadata Row */}
+          <div className="flex items-center gap-3.5 text-xs font-mono text-neutral-400 mb-3.5">
+            <span className="flex items-center gap-1.5 text-neutral-300">
+              <span className="w-1 h-1 rounded-full bg-white/70 inline-block" />
+              {story.stats.secondary}
+            </span>
+            <span className="w-[1px] h-3 bg-white/[0.1]" />
+            <span className="flex items-center gap-1.5 text-neutral-300">
+              <span className="w-1 h-1 rounded-full bg-white/70 inline-block" />
+              {story.stats.metric}
+            </span>
           </div>
 
           {/* Case Headline */}
-          <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug mb-3">
+          <h3 className="text-xl sm:text-2xl font-normal text-white tracking-tight leading-snug mb-2.5">
             {story.event}
           </h3>
 
           {/* Teaser Summary */}
-          <p className="text-xs sm:text-[13.5px] text-[#A0A0A0] leading-relaxed mb-5">
+          <p className="text-sm text-neutral-400 leading-relaxed font-light mb-6">
             {story.teaser}
           </p>
 
           {/* ── IN-BOX EXPANDED CONTENT ── */}
           {isOpen && (
-            <div className="mt-5 pt-5 border-t border-white/[0.08] animate-in fade-in slide-in-from-top-2 duration-300">
+            <div className="pt-5 border-t border-white/[0.06] animate-in fade-in duration-200">
               {/* Full Authentic Story from hardcallsales.se */}
-              <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-5 sm:p-6 mb-5 relative">
-                <div className="absolute top-4 right-4 opacity-20">
-                  <Sparkles size={18} className="text-[#B794F4]" />
-                </div>
-                <span className="block text-[10px] font-mono uppercase tracking-widest text-[#B794F4] mb-2 font-semibold">
+              <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-5 sm:p-6 mb-5">
+                <span className="block text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-2 font-medium">
                   HELA UPPDRAGSBERÄTTELSEN
                 </span>
-                <p className="text-[13.5px] sm:text-[14.5px] text-[#E0E0E6] leading-relaxed font-sans font-normal">
+                <p className="text-[13.5px] sm:text-[14.5px] text-neutral-300 leading-relaxed font-sans font-light">
                   {story.fullStory}
                 </p>
               </div>
 
               {/* Delivery Scope & Target Details Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-black/40 border border-white/[0.05] mb-5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-black/50 border border-white/[0.04] mb-5">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#8A8A90] block mb-1">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 block mb-1">
                     OMFATTNING
                   </span>
-                  <span className="text-xs text-white/95 font-medium leading-tight block">
+                  <span className="text-xs text-neutral-200 font-normal leading-tight block">
                     {story.deliveryDetails.scope}
                   </span>
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#8A8A90] block mb-1">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 block mb-1">
                     MÅLGRUPP
                   </span>
-                  <span className="text-xs text-white/95 font-medium leading-tight block">
+                  <span className="text-xs text-neutral-200 font-normal leading-tight block">
                     {story.deliveryDetails.target}
                   </span>
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#B794F4] block mb-1">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block mb-1">
                     LEVERERAT UTFALL
                   </span>
-                  <span className="text-xs text-[#E9D8FD] font-medium leading-tight block">
+                  <span className="text-xs text-white font-medium leading-tight block">
                     {story.deliveryDetails.outcome}
                   </span>
                 </div>
@@ -147,41 +117,37 @@ export function StoryCard({ story }: { story: typeof HCS_STORIES[0] }) {
         </div>
 
         {/* ── CARD FOOTER ACTIONS ── */}
-        <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between gap-3 mt-4">
+        <div className="pt-4 border-t border-white/[0.05] flex items-center justify-between gap-3 mt-2">
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide uppercase transition-all duration-150 cursor-pointer active:scale-[0.98] ${
               isOpen
-                ? "bg-white text-black hover:bg-neutral-200 shadow-lg"
-                : "bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/10 hover:border-white/20"
+                ? "bg-white text-black hover:bg-neutral-200 shadow-md font-semibold"
+                : "bg-white/[0.03] hover:bg-white/[0.07] text-neutral-300 hover:text-white border border-white/[0.08] hover:border-white/[0.16]"
             }`}
           >
             {isOpen ? (
               <>
                 <span>Dölj uppdrag</span>
-                <ChevronUp size={14} className="text-black" />
+                <ChevronUp size={13} className="text-black" />
               </>
             ) : (
               <>
                 <span>Läs hela kundcaset</span>
-                <ChevronDown size={14} className="text-[#B794F4]" />
+                <ChevronDown size={13} className="text-neutral-400 group-hover:text-white transition-colors" />
               </>
             )}
           </button>
 
-          {isOpen ? (
+          {isOpen && (
             <Link
               href="/boka-mote"
-              className="inline-flex items-center gap-2 text-xs sm:text-[13px] font-bold text-[#B794F4] hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-400 hover:text-white transition-colors"
             >
               <span>Boka liknande upplägg</span>
-              <ArrowRight size={14} />
+              <ArrowRight size={13} />
             </Link>
-          ) : (
-            <span className="text-[11px] font-mono text-[#7A7A80] uppercase tracking-wider hidden sm:inline">
-              KLICKA FÖR ATT EXPANDERA
-            </span>
           )}
         </div>
       </div>
@@ -215,7 +181,7 @@ export const CaseStoriesSection: React.FC = () => {
     <section
       ref={sectionRef}
       id="kunder"
-      className="w-full bg-[#0A0A0A] text-white py-24 sm:py-32 border-b border-[#1F1F1F] relative overflow-hidden"
+      className="w-full bg-[#08080A] text-white py-24 sm:py-32 border-b border-white/[0.08] relative overflow-hidden"
     >
       {/* ── SYNCED LJUSUPPTÄNDNING MOT PILOTPROGRAMMET: Tänds mjukt upp till #FBFBFC ── */}
       <div
@@ -223,18 +189,12 @@ export const CaseStoriesSection: React.FC = () => {
         style={{ opacity: exitProgress }}
       />
 
-      {/* Ambient background glow (dämpas när rummet tänds upp mot piloten) */}
-      <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-900/10 rounded-full blur-[140px] pointer-events-none select-none z-0 transition-opacity duration-75 ease-linear"
-        style={{ opacity: Math.max(0, 1 - exitProgress) }}
-      />
-
       <div className="max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-12 relative z-10">
         {/* Editorial Section Header */}
-        <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12 sm:mb-16 border-b border-white/10 pb-8">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12 sm:mb-16 border-b border-white/[0.08] pb-8">
           <div>
-            <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#7851A9] mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#7851A9]" />
+            <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-neutral-400 mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-white/60" />
               <span>DOKUMENTERADE KUNDRESULTAT</span>
             </div>
             <h2 className="text-3xl sm:text-5xl lg:text-[54px] font-normal tracking-tight text-white leading-[1.1]">
