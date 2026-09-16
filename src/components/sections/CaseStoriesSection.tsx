@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, TrendingUp, CheckCircle2, ChevronDown, ChevronUp, Sparkles, X } from "lucide-react";
 import { HCS_STORIES, type CaseStory } from "@/data/caseStoriesData";
+import { openCalModal, DEFAULT_CAL_LINK } from "@/components/cal/CalProvider";
 
 export { HCS_STORIES };
 
@@ -141,13 +142,19 @@ export function StoryCard({ story }: { story: typeof HCS_STORIES[0] }) {
                 >
                   Stäng [ × ]
                 </button>
-                <Link
-                  href="/boka-mote"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black font-medium text-xs tracking-wider uppercase hover:bg-neutral-200 transition-all shadow-md"
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openCalModal();
+                  }}
+                  data-cal-link={DEFAULT_CAL_LINK}
+                  data-cal-config='{"layout":"month_view","theme":"dark"}'
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black font-medium text-xs tracking-wider uppercase hover:bg-neutral-200 transition-all shadow-md cursor-pointer"
                 >
                   <span>Boka liknande upplägg</span>
                   <ArrowRight size={13} />
-                </Link>
+                </button>
               </div>
             </div>
           )}

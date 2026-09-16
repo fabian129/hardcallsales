@@ -3,8 +3,9 @@
 import React, { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { ArrowLeft, CheckCircle2, Sparkles, Shield, Clock } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Sparkles, Shield, Clock, Calendar, ArrowRight } from "lucide-react";
 import { BookingForm } from "@/components/sections/BookingForm";
+import { openCalModal, DEFAULT_CAL_LINK } from "@/components/cal/CalProvider";
 
 function BookingFormWithParams() {
   const searchParams = useSearchParams();
@@ -45,6 +46,22 @@ export default function BookingPage() {
           <p className="text-neutral-300 text-base sm:text-xl font-normal leading-relaxed max-w-2xl">
             Välj vad ni vill uppnå och lämna era uppgifter. Vi återkommer inom 24 timmar för att gå igenom er målgrupp och hur en 3-månaders pilot kan se ut för er.
           </p>
+
+          {/* Quick Direct Calendar Modal Booking Option */}
+          <div className="flex flex-wrap items-center gap-4 mt-8">
+            <button
+              type="button"
+              onClick={() => openCalModal()}
+              data-cal-link={DEFAULT_CAL_LINK}
+              data-cal-config='{"layout":"month_view","theme":"dark"}'
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white text-black font-semibold text-xs tracking-wider uppercase hover:bg-neutral-200 transition-all shadow-lg cursor-pointer"
+            >
+              <Calendar size={15} />
+              <span>Välj tid direkt i kalendern</span>
+              <ArrowRight size={14} />
+            </button>
+            <span className="text-xs font-mono text-neutral-400">eller fyll i specifikationen nedan ↓</span>
+          </div>
 
           {/* 3 Trust Signals */}
           <div className="flex flex-wrap items-center gap-6 sm:gap-10 pt-8 mt-8 border-t border-white/10 text-xs font-mono text-neutral-400">

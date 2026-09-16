@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { openCalModal, DEFAULT_CAL_LINK } from "@/components/cal/CalProvider";
 
 interface Milestone {
   stepNum: string;
@@ -161,13 +162,16 @@ export const PilotProgramSection: React.FC = () => {
 
         {/* ── BOTTEN: ENSAM HEROISK CTA (Gravitation & Slutdestination) ── */}
         <div className="pt-6 sm:pt-10 flex justify-center items-center relative z-20">
-          <Link
-            href="/boka-mote"
-            className="inline-flex items-center gap-3.5 px-10 py-4 sm:px-12 sm:py-5 rounded-full bg-[#111111] text-white text-xs sm:text-sm font-medium tracking-widest uppercase hover:bg-black transition-all duration-300 shadow-[0_16px_40px_rgba(0,0,0,0.12)] hover:shadow-[0_24px_55px_rgba(0,0,0,0.22)] hover:-translate-y-1 group"
+          <button
+            type="button"
+            onClick={() => openCalModal()}
+            data-cal-link={DEFAULT_CAL_LINK}
+            data-cal-config='{"layout":"month_view","theme":"dark"}'
+            className="inline-flex items-center gap-3.5 px-10 py-4 sm:px-12 sm:py-5 rounded-full bg-[#111111] text-white text-xs sm:text-sm font-medium tracking-widest uppercase hover:bg-black transition-all duration-300 shadow-[0_16px_40px_rgba(0,0,0,0.12)] hover:shadow-[0_24px_55px_rgba(0,0,0,0.22)] hover:-translate-y-1 group cursor-pointer"
           >
             <span>BOKA ETT STRATEGISAMTAL</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-          </Link>
+          </button>
         </div>
 
       </div>

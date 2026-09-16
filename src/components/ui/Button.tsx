@@ -2,12 +2,15 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { openCalModal, DEFAULT_CAL_LINK } from "@/components/cal/CalProvider";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline" | "ghost" | "paper" | "dark";
   size?: "sm" | "md" | "lg";
   href?: string;
   isExternal?: boolean;
+  calLink?: string;
+  useCalModal?: boolean;
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
   hasArrow?: boolean;
@@ -21,6 +24,8 @@ export const Button: React.FC<ButtonProps> = ({
   size = "md",
   href,
   isExternal = false,
+  calLink,
+  useCalModal,
   icon,
   iconPosition = "right",
   hasArrow = false,
@@ -96,6 +101,19 @@ export const Button: React.FC<ButtonProps> = ({
     </>
   );
 
+  const isCalTrigger = useCalModal || !!calLink || href === "/boka-mote";
+  const activeCalLink = calLink || DEFAULT_CAL_LINK;
+
+  const handleCalClick = (e: React.MouseEvent<HTMLElement>) => {
+    if (props.onClick) {
+      props.onClick(e as unknown as React.MouseEvent<HTMLButtonElement>);
+    }
+    if (isCalTrigger && !isExternal) {
+      e.preventDefault();
+      openCalModal(activeCalLink);
+    }
+  };
+
   if (href) {
     if (isExternal) {
       return (
@@ -110,14 +128,26 @@ export const Button: React.FC<ButtonProps> = ({
       );
     }
     return (
-      <Link href={href} className={combinedClassName}>
+      <Link
+        href={href}
+        className={combinedClassName}
+        onClick={isCalTrigger ? handleCalClick : props.onClick as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+        data-cal-link={isCalTrigger ? activeCalLink : undefined}
+        data-cal-config={isCalTrigger ? '{"layout":"month_view","theme":"dark"}' : undefined}
+      >
         {content}
       </Link>
     );
   }
 
   return (
-    <button className={combinedClassName} {...props}>
+    <button
+      className={combinedClassName}
+      onClick={isCalTrigger ? handleCalClick : props.onClick}
+      data-cal-link={isCalTrigger ? activeCalLink : undefined}
+      data-cal-config={isCalTrigger ? '{"layout":"month_view","theme":"dark"}' : undefined}
+      {...props}
+    >
       {content}
     </button>
   );
