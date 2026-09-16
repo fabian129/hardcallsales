@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { Container } from "@/components/ui/Container";
+import { ArrowRight } from "lucide-react";
+import { openCalModal, DEFAULT_CAL_LINK } from "@/components/cal/CalProvider";
 
 export const ContactSplitSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"email" | "calendar">("email");
@@ -102,7 +104,12 @@ export const ContactSplitSection: React.FC = () => {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setActiveTab("calendar")}
+                    onClick={() => {
+                      setActiveTab("calendar");
+                      openCalModal();
+                    }}
+                    data-cal-link={DEFAULT_CAL_LINK}
+                    data-cal-config='{"layout":"month_view","theme":"dark"}'
                     className={`text-sm sm:text-base font-semibold pb-3 sm:pb-4 -mb-3 sm:-mb-4 transition-colors cursor-pointer ${
                       activeTab === "calendar"
                         ? "text-black border-b-2 border-black"
@@ -119,9 +126,21 @@ export const ContactSplitSection: React.FC = () => {
                     <p className="text-base text-[#666666]">Vår mötesexpert hör av sig inom kort.</p>
                   </div>
                 ) : activeTab === "calendar" ? (
-                  <div className="py-20 text-center text-sm sm:text-base text-[#777777] my-auto">
-                    <p className="mb-4 font-medium text-black">Kalenderintegration aktiverad.</p>
-                    <p className="text-[#888888]">Välj en tid direkt med säljledningen i nästa steg.</p>
+                  <div className="py-16 text-center my-auto flex flex-col items-center justify-center">
+                    <p className="text-base sm:text-lg font-semibold text-black mb-2">Boka 15 min strategisamtal</p>
+                    <p className="text-sm text-[#666666] max-w-sm mb-6">
+                      Välj en tid direkt i Malin Berlins kalender för ett förutsättningslöst introduktionsmöte.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => openCalModal()}
+                      data-cal-link={DEFAULT_CAL_LINK}
+                      data-cal-config='{"layout":"month_view","theme":"dark"}'
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white text-xs font-semibold uppercase tracking-wider hover:bg-neutral-800 transition-all cursor-pointer shadow-md"
+                    >
+                      <span>Välj tid i kalendern</span>
+                      <ArrowRight size={14} />
+                    </button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="flex-1 flex flex-col justify-between">

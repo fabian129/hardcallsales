@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { getCalApi } from "@calcom/embed-react";
 
 export const DEFAULT_CAL_LINK =
-  process.env.NEXT_PUBLIC_CAL_LINK || "hardcallsales/strategimote";
+  process.env.NEXT_PUBLIC_CAL_LINK || "malin-berlin-hardcallsales/15min";
 
 export function CalProvider() {
   useEffect(() => {

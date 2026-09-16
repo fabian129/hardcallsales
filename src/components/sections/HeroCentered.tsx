@@ -72,7 +72,7 @@ export const HeroCentered: React.FC = () => {
               </Button>
               
               <Button
-                href="#kontakt"
+                useCalModal
                 variant="primary"
                 size="md"
                 hasArrow
