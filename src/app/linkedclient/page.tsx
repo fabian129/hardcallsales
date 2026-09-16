@@ -2,6 +2,8 @@ import React from "react";
 import type { Metadata } from "next";
 import { LinkedClientHero } from "@/components/sections/LinkedClientHero";
 import { LinkedClientLogos } from "@/components/sections/LinkedClientLogos";
+import { LinkedClientManifesto } from "@/components/sections/LinkedClientManifesto";
+import { LinkedClientPlaygroundSection } from "@/components/sections/LinkedClientPlaygroundSection";
 
 export const metadata: Metadata = {
   title: "LinkedClient — Autonom AI-Säljagent för B2B | Hard Call Sales",
@@ -22,6 +24,12 @@ export default function LinkedClientPage() {
 
       {/* 2. Partner Logos presented cleanly and beautifully without slop */}
       <LinkedClientLogos />
+
+      {/* 3. Typographic Manifesto (Problem & Solution matching Bild 2) */}
+      <LinkedClientManifesto />
+
+      {/* 4. Interactive Feature Section (Bild 2 Layout + Bild 1 Playground Window) */}
+      <LinkedClientPlaygroundSection />
     </div>
   );
 }

@@ -64,9 +64,9 @@ export const LinkedClientHero: React.FC = () => {
   const activePill = workflowPills.find((p) => p.id === activePillId) || workflowPills[2];
 
   return (
-    <section className="relative w-full min-h-[800px] lg:h-screen lg:max-h-[1020px] bg-[#000000] text-white overflow-hidden flex flex-col justify-center pt-24 pb-14 lg:py-20">
-      {/* --- RIGHT SIDE 3D APERTURE / PORTAL VORTEX --- */}
-      <div className="absolute right-[-10%] sm:right-[-6%] lg:right-[-3%] xl:right-[-1%] top-1/2 -translate-y-1/2 w-[92vw] sm:w-[75vw] lg:w-[60vw] xl:w-[55vw] h-[85vh] max-h-[960px] pointer-events-none select-none z-0">
+    <section className="relative w-full min-h-[720px] lg:h-[860px] lg:max-h-[920px] bg-[#000000] text-white overflow-hidden flex flex-col justify-center pt-24 pb-12 lg:py-16">
+      {/* --- RIGHT SIDE 3D APERTURE / PORTAL VORTEX (Clean, pure visual without clutter) --- */}
+      <div className="absolute right-[-10%] sm:right-[-6%] lg:right-[-2%] xl:right-[1%] top-1/2 -translate-y-1/2 w-[92vw] sm:w-[75vw] lg:w-[60vw] xl:w-[54vw] h-[85vh] max-h-[960px] pointer-events-none select-none z-0">
         <div className="relative w-full h-full">
           <Image
             src="/images/linkedclient-portal.jpg"
@@ -75,55 +75,34 @@ export const LinkedClientHero: React.FC = () => {
             priority
             className="object-contain object-right"
           />
-
-          {/* Concentric Floating Ghost Tags along the ripples */}
-          <div className="hidden xl:flex items-center gap-2 absolute top-[13%] right-[22%] text-neutral-400/50 text-[11px] font-mono tracking-wider pointer-events-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400/60" />
-            <span>100M+ B2B Databas</span>
-          </div>
-
-          <div className="hidden lg:flex items-center gap-2 absolute top-[25%] left-[15%] text-neutral-400/60 text-[11px] font-mono tracking-wider pointer-events-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/70" />
-            <span>Multikanal AI-Sekvens</span>
-          </div>
-
-          <div className="hidden lg:flex items-center gap-2 absolute bottom-[22%] left-[16%] text-neutral-400/60 text-[11px] font-mono tracking-wider pointer-events-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-pink-400/70" />
-            <span>Human-in-the-Loop Avslut</span>
-          </div>
-
-          <div className="hidden xl:flex items-center gap-2 absolute bottom-[12%] right-[23%] text-neutral-400/50 text-[11px] font-mono tracking-wider pointer-events-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
-            <span>99.4% Deliverability</span>
-          </div>
         </div>
       </div>
 
       {/* --- FOREGROUND CONTENT CONTAINER --- */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16">
         <div className="max-w-2xl lg:max-w-2xl xl:max-w-3xl">
-          {/* Eyebrow in Magenta-to-Cyan Gradient (1:1 with New Navigation bar:) */}
-          <div className="inline-flex items-center mb-2">
-            <span className="text-base sm:text-lg lg:text-xl font-medium tracking-tight bg-gradient-to-r from-[#F43F5E] via-[#D946EF] to-[#38BDF8] bg-clip-text text-transparent">
+          {/* Eyebrow in Magenta-to-Cyan Gradient */}
+          <div className="inline-flex items-center mb-3">
+            <span className="text-sm sm:text-base lg:text-lg font-medium tracking-tight bg-gradient-to-r from-[#F43F5E] via-[#D946EF] to-[#38BDF8] bg-clip-text text-transparent">
               Världens första AI-Sales agent:
             </span>
           </div>
 
-          {/* Primary Display Headline (1:1 with Streamlining Access to Essential Features.) */}
-          <h1 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-normal tracking-tight text-white leading-[1.16] mb-5">
+          {/* Primary Display Headline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-[54px] xl:text-[58px] font-normal tracking-tight text-white leading-[1.12] mb-6">
             Framtiden är äntligen här och knackar på.
           </h1>
 
-          {/* Top Description Copy */}
-          <p className="text-sm sm:text-[15px] text-neutral-400 font-light leading-relaxed mb-8 max-w-xl">
-            När vi kombinerar AI-outreach med traditionella cold calls bokar vi nykundsmöten som i mycket högre grad leder till affärer. Autonom prospektering och hyper-personaliserad kontakt möter erfarna telefonsäljares avslut i en helt integrerad säljmotor.
+          {/* Single clean lead paragraph */}
+          <p className="text-base sm:text-lg text-neutral-400 font-light leading-relaxed mb-8 max-w-xl">
+            När vi kombinerar autonom AI-outreach med traditionella cold calls bokar vi nykundsmöten som i mycket högre grad leder till affärer.
           </p>
 
           {/* --- FLOATING DARK UI WINDOW (1:1 with reference) --- */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mb-8">
-            <div className="w-full sm:w-auto inline-flex flex-col bg-[#0D0F13]/95 backdrop-blur-2xl border border-white/[0.12] rounded-2xl p-3 sm:p-4 shadow-[0_25px_60px_rgba(0,0,0,0.95)]">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mb-10">
+            <div className="w-full sm:w-auto inline-flex flex-col bg-[#0D0F13]/95 backdrop-blur-2xl border border-white/[0.12] rounded-2xl p-3 sm:p-3.5 shadow-[0_25px_60px_rgba(0,0,0,0.95)]">
               {/* Window Title Bar with Traffic Lights and Tabs */}
-              <div className="flex items-center gap-3 pb-3 border-b border-white/[0.08] mb-3">
+              <div className="flex items-center gap-3 pb-2.5 border-b border-white/[0.08] mb-2.5">
                 {/* Traffic lights */}
                 <div className="flex items-center gap-1.5 pr-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block" />
@@ -188,41 +167,22 @@ export const LinkedClientHero: React.FC = () => {
             </div>
           </div>
 
-          {/* Bottom paragraph (1:1 with reference's lower copy block) */}
-          <p className="text-sm sm:text-[14px] text-neutral-400 font-light leading-relaxed max-w-xl mb-6">
-            Genom att automatisera prospekteringen och den inledande kontakten kan våra erfarna mötesbokare fokusera 100% av sin tid på att kvalificera genuint intresse och stänga mötet över telefon.
-          </p>
-
-          {/* Joakim Ström Quote */}
-          <blockquote className="mb-8 max-w-xl pl-3.5 border-l-2 border-[#38BDF8]/60 py-0.5 text-xs sm:text-[13px] text-neutral-300 font-light italic leading-relaxed">
-            ”Vi har aldrig sett något liknande. De kunder som har flyttat över har en otroligt hög ROI.”
-            <footer className="mt-1 not-italic font-mono text-[11px] text-neutral-500 uppercase tracking-wider">
-              — Joakim Viking Ström, Co-Founder CFD
-            </footer>
-          </blockquote>
-
           {/* Action CTAs: Book Demo (Cal.com modal) & Certified Badge */}
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6">
+          <div className="flex flex-wrap items-center gap-4">
             <button
               type="button"
               onClick={() => openCalModal()}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-black font-semibold text-xs sm:text-sm hover:bg-neutral-200 transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] active:scale-[0.98]"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)] active:scale-[0.98]"
             >
               <Calendar className="w-4 h-4 text-black" />
               <span>Boka en live-demo</span>
               <ArrowRight className="w-3.5 h-3.5 text-black" />
             </button>
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-emerald-500/[0.08] border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+            <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-emerald-500/[0.08] border border-emerald-500/30 text-emerald-400 text-xs font-mono">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
               <span>Certified LinkedClient Partner</span>
             </div>
-          </div>
-
-          {/* Quiet micro-footnote */}
-          <div className="text-[11px] text-neutral-500 font-mono flex items-center gap-1.5">
-            <Sparkles className="w-3 h-3 text-[#38BDF8]/70" />
-            <span>A single click, and the magic unfolds.</span>
           </div>
         </div>
       </div>
