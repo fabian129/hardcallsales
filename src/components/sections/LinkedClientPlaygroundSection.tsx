@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { RotateCcw, Mic, ArrowUp, Users, Send, Clock, UserCheck } from "lucide-react";
 
@@ -11,7 +11,6 @@ interface Scenario {
   icon: React.ReactNode;
   prospectName: string;
   prospectRole: string;
-  thinkingText: string;
   agentInitialMessage: string;
   prospectReply: string;
   agentReply: string;
@@ -25,13 +24,12 @@ const scenarios: Scenario[] = [
     icon: <Users className="w-4 h-4 text-[#38BDF8]" />,
     prospectName: "David Lindgren",
     prospectRole: "COO, Industriell Automation",
-    thinkingText: "Identifierar gemensamma branschberöringspunkter och formulerar en mjuk kontaktförfrågan...",
     agentInitialMessage:
-      "Hej David! Följer er expansion inom industriell automation med stort intresse. Jag knyter gärna kontakt här på LinkedIn för att följa er resa och utbyta erfarenheter kring komplex B2B-försäljning i Norden.",
+      "Hej David! Följer er expansion inom industriell automation. Knyter gärna kontakt här på LinkedIn för att följa er resa och utbyta erfarenheter.",
     prospectReply:
-      "Tack! Alltid kul med relevanta branschkontakter. Godkänner gärna. Ser att ni jobbar med flera bolag i vår sektor.",
+      "Tack David! Godkänner gärna. Ser att ni jobbar med flera bolag i vår sektor.",
     agentReply:
-      "Verkligen! Många i din roll som vi pratar med märker att marknaden kräver mer proaktivitet just nu. Ska vi ta en 10-minuters digital kaffe nästa vecka och utbyta erfarenheter?",
+      "Verkligen. Många i din roll märker att marknaden kräver mer proaktivitet just nu. Har du tid för en 10-minuters digital kaffe nästa vecka?",
   },
   {
     id: "cold_prospecting",
@@ -40,13 +38,12 @@ const scenarios: Scenario[] = [
     icon: <Send className="w-4 h-4 text-[#38BDF8]" />,
     prospectName: "Helena Sjöberg",
     prospectRole: "Head of Sales, Enterprise B2B",
-    thinkingText: "Matchar ICP-kriterier och adresserar flaskhalsen med säljares manuella researchtid...",
     agentInitialMessage:
-      "Hej Helena! Såg att ni rekryterar flera seniora Account Executives. Många säljchefer vi möter ser att deras säljare lägger upp till 40% av sin tid på manuell research och outreach istället för i kundmöten. Har du 10 minuter för att se hur AVEVA frigjorde 20+ timmar i veckan per säljare?",
+      "Hej Helena! Såg att ni rekryterar säljare. Nyfiken på hur ni säkerställer att seniora säljare hinner ta kundmöten istället för manuell research?",
     prospectReply:
-      "Vi har redan verktyg för lead lists och kör det mesta internt just nu.",
+      "Vi har redan verktyg för leadlistor och kör ganska mycket själva just nu.",
     agentReply:
-      "Full förståelse Helena. Skillnaden är att vi inte levererar ännu en verktygslicens eller rå kontaktlista — vår AI-agent för dialogen, hanterar invändningar och lämnar över varma möten direkt i er kalender. Låter 15 minuter tisdag kl 10 rimligt för att se skillnaden?",
+      "Full förståelse. Vår AI-agent kvalificerar och bokar mötet direkt i kalendern — säljarna slipper listorna. Låter 10 minuter tisdag rimligt för att se skillnaden?",
   },
   {
     id: "followup",
@@ -55,13 +52,12 @@ const scenarios: Scenario[] = [
     icon: <Clock className="w-4 h-4 text-[#38BDF8]" />,
     prospectName: "Johan Wallin",
     prospectRole: "VD, Tillverkande Industri",
-    thinkingText: "Läser tidigare mötesanteckningar och triggar uppföljning baserat på budgetcykeln...",
     agentInitialMessage:
-      "Hej Johan! Vi pratades vid i november kring er pipeline inför Q1. Du nämnde då att ni behövde avvakta den nya budgeten i februari. Hur ser prioriteringarna ut nu när ni kliver in i Q2?",
+      "Hej Johan! Vi pratades vid kring er pipeline inför budgetrundan. Hur landade prioriteringarna för Q2?",
     prospectReply:
-      "Tjena! Budgeten är på plats nu men vi har fullt upp med lanseringen de närmsta två veckorna.",
+      "Budgeten är på plats nu, men har fullt upp med lanseringen de närmsta två veckorna.",
     agentReply:
-      "Grattis till budgeten Johan! Då ska vi absolut inte störa mitt i lanseringen. Jag sätter en påminnelse och skickar en kalenderinbjudan preliminärt till torsdag den 24:e när lanseringen har landat. Funkar 13:00?",
+      "Grattis till budgeten Johan! Då stör jag inte under lanseringen. Jag reserverar preliminärt torsdag den 24:e när dammet lagt sig. Funkar 13:00?",
   },
   {
     id: "network_outreach",
@@ -69,37 +65,52 @@ const scenarios: Scenario[] = [
     tabSubtitle: "Aktiverar 15 000–30 000 uppbyggda kontakter",
     icon: <UserCheck className="w-4 h-4 text-[#38BDF8]" />,
     prospectName: "Marcus Berg",
-    prospectRole: "Head of Partnerships, Tech & IT",
-    thinkingText: "Scannar befintliga 1:a-handskontakter efter nya köpsignaler och rollförändringar...",
+    prospectRole: "Head of Partnerships, Tech",
     agentInitialMessage:
-      "Hej Marcus! Vi har varit anslutna här på LinkedIn ett tag. Jag såg att ni precis rullade ut ert nya partnererbjudande. Vi hjälpte nyligen flera bolag i ert nätverk att aktivera sina befintliga kontakter till skarpa möten. Vore det intressant med en snabb brief på hur de gjorde?",
+      "Hej Marcus! Såg att ni rullade ut ert nya erbjudande. Vi hjälpte nyligen flera i ditt nätverk att aktivera slumrande kontakter till skarpa möten.",
     prospectReply:
-      "Låter faktiskt relevant. Hur ser upplägget ut?",
+      "Låter intressant faktiskt. Hur ser upplägget ut?",
     agentReply:
-      "Vår AI scannar era befintliga LinkedIn-kontakter och identifierar köpsignaler baserat på rollbyten och engagemang. Jag har skickat över en 2-minuters översikt till din inkorg — har du tid för en 10-minuters avstämning på torsdag?",
+      "Vår AI scannar dina kontakter efter köpsignaler och skickar träffsäker dialog. Skickade en 1-minuts video till din inkorg — har du 10 minuter på torsdag?",
   },
 ];
 
 export const LinkedClientPlaygroundSection: React.FC = () => {
   const [activeScenarioId, setActiveScenarioId] = useState<string>("networking");
-  const [isThinking, setIsThinking] = useState<boolean>(false);
+  // animStage: 0: reset, 1: msg1 visible, 2: msg2 visible, 2.5: thinking, 3: msg3 visible
+  const [animStage, setAnimStage] = useState<number>(3);
   const activeScenario = scenarios.find((s) => s.id === activeScenarioId) || scenarios[0];
+  const timersRef = useRef<NodeJS.Timeout[]>([]);
+
+  const clearAllTimers = () => {
+    timersRef.current.forEach((t) => clearTimeout(t));
+    timersRef.current = [];
+  };
+
+  const startSequentialAnimation = () => {
+    clearAllTimers();
+    setAnimStage(0);
+
+    const t1 = setTimeout(() => setAnimStage(1), 150);
+    const t2 = setTimeout(() => setAnimStage(2), 700);
+    const t3 = setTimeout(() => setAnimStage(2.5), 1250);
+    const t4 = setTimeout(() => setAnimStage(3), 1900);
+
+    timersRef.current = [t1, t2, t3, t4];
+  };
 
   const handleScenarioClick = (id: string) => {
-    if (id === activeScenarioId) return;
-    setIsThinking(true);
+    if (id === activeScenarioId) {
+      startSequentialAnimation();
+      return;
+    }
     setActiveScenarioId(id);
-    setTimeout(() => {
-      setIsThinking(false);
-    }, 450);
+    startSequentialAnimation();
   };
 
-  const handleReset = () => {
-    setIsThinking(true);
-    setTimeout(() => {
-      setIsThinking(false);
-    }, 350);
-  };
+  useEffect(() => {
+    return () => clearAllTimers();
+  }, []);
 
   return (
     <section id="playground" className="w-full bg-[#000000] text-white py-20 sm:py-28 lg:py-36 relative z-10 border-t border-white/[0.06]">
@@ -135,10 +146,10 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Main Interactive Grid matching Bild 2 layout with Bild 1 component inside */}
+        {/* Main Interactive Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: 4 Real Commercial Scenarios matching Bild 2 */}
+          {/* Left Column: 4 Real Commercial Scenarios */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-8">
             <div className="space-y-3 sm:space-y-4">
               {scenarios.map((scenario) => {
@@ -148,7 +159,7 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
                     key={scenario.id}
                     type="button"
                     onClick={() => handleScenarioClick(scenario.id)}
-                    className={`w-full text-left py-4 px-5 rounded-2xl transition-all duration-300 flex flex-col gap-1 group border ${
+                    className={`w-full text-left py-4 px-5 rounded-2xl transition-all duration-300 flex flex-col gap-1 group border cursor-pointer ${
                       isActive
                         ? "bg-white/[0.07] border-white/20 shadow-lg"
                         : "bg-white/[0.02] border-transparent hover:bg-white/[0.04] hover:border-white/10"
@@ -171,7 +182,7 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
               })}
             </div>
 
-            {/* Bottom Footnote matching Bild 2 */}
+            {/* Bottom Footnote */}
             <div className="pt-6 border-t border-white/[0.08]">
               <p className="text-xs sm:text-sm text-neutral-500 font-light leading-relaxed">
                 Varje scenario konfigureras med era unika målgrupper, tonalitet och konverteringsmål — AI-agenten sköter dialogen, era säljare tar över när mötet är bokat.
@@ -179,14 +190,14 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: 1:1 Recreation of Bild 1 (Sales Agent Playground Window) */}
+          {/* Right Column: 1:1 Recreation of Bild 1 with Sequential Soft Fade-in */}
           <div className="lg:col-span-7 flex justify-center">
             <div className="w-full max-w-[560px] rounded-[32px] bg-[#0C0E14] border border-white/[0.12] p-6 sm:p-8 shadow-[0_30px_90px_rgba(0,0,0,0.95)] relative overflow-hidden">
               
-              {/* Ambient Light Bleed on Left Edge matching Bild 1 */}
+              {/* Ambient Light Bleed on Left Edge */}
               <div className="absolute top-1/3 left-[-30px] w-24 h-48 bg-white/[0.06] blur-2xl rounded-full pointer-events-none" />
 
-              {/* Playground Header matching Bild 1 */}
+              {/* Playground Header */}
               <div className="flex items-center justify-between pb-6 mb-6 border-b border-white/[0.08] relative z-10">
                 <div className="flex items-center gap-3">
                   {/* Chrome Orb Avatar */}
@@ -208,21 +219,28 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Reset Action */}
+                {/* Replay Sequence Button */}
                 <button
                   type="button"
-                  onClick={handleReset}
+                  onClick={startSequentialAnimation}
                   className="text-neutral-400 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-white/[0.06]"
-                  title="Återställ dialog"
+                  title="Spela upp sekvens igen"
                 >
                   <RotateCcw className="w-4 h-4" />
                 </button>
               </div>
 
-              {/* Message Stream matching Bild 1 */}
-              <div className="space-y-5 mb-8 relative z-10 min-h-[300px]">
-                {/* Agent Message 1 */}
-                <div className="flex items-start gap-3">
+              {/* Message Stream: Sequential Soft Fade-in */}
+              <div className="space-y-4 mb-8 relative z-10 min-h-[290px] flex flex-col justify-start">
+                
+                {/* Message 1: Agent Initial Outreach */}
+                <div
+                  className={`flex items-start gap-3 transition-all duration-500 ease-out ${
+                    animStage >= 1
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-3 pointer-events-none"
+                  }`}
+                >
                   <div className="relative w-6 h-6 rounded-full overflow-hidden flex-shrink-0 mt-0.5 opacity-85">
                     <Image
                       src="/images/agent-orb-clean.png"
@@ -231,14 +249,20 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
                       className="object-contain"
                     />
                   </div>
-                  <div className="text-xs sm:text-[13px] text-neutral-300 font-light leading-relaxed bg-white/[0.03] p-3.5 rounded-2xl rounded-tl-sm border border-white/[0.05]">
+                  <div className="text-xs sm:text-[13px] text-neutral-200 font-light leading-relaxed bg-white/[0.04] p-3.5 rounded-2xl rounded-tl-sm border border-white/[0.06] max-w-[85%]">
                     {activeScenario.agentInitialMessage}
                   </div>
                 </div>
 
-                {/* Prospect Objection/Response Message (Right Aligned Dark Bubble) */}
-                <div className="flex justify-end">
-                  <div className="max-w-[85%] rounded-2xl rounded-tr-sm bg-[#161922] border border-white/[0.08] p-4 text-xs sm:text-[13px] text-neutral-200 font-light leading-relaxed shadow-lg">
+                {/* Message 2: Prospect Response (Right Aligned) */}
+                <div
+                  className={`flex justify-end transition-all duration-500 ease-out ${
+                    animStage >= 2
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-3 pointer-events-none"
+                  }`}
+                >
+                  <div className="max-w-[82%] rounded-2xl rounded-tr-sm bg-[#161922] border border-white/[0.08] p-3.5 text-xs sm:text-[13px] text-neutral-200 font-light leading-relaxed shadow-lg">
                     <div className="text-[10px] font-mono text-neutral-500 mb-1">
                       {activeScenario.prospectName} · {activeScenario.prospectRole}
                     </div>
@@ -246,8 +270,32 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Agent Response / Thinking State matching Bild 1 */}
-                <div className="flex items-start gap-3 transition-all duration-300">
+                {/* Thinking Indicator (while stage === 2.5) */}
+                {animStage === 2.5 && (
+                  <div className="flex items-start gap-3 transition-all duration-300 animate-fadeIn">
+                    <div className="relative w-6 h-6 rounded-full overflow-hidden flex-shrink-0 mt-0.5 opacity-85">
+                      <Image
+                        src="/images/agent-orb-clean.png"
+                        alt="Sales Agent Orb"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="text-xs sm:text-[13px] text-neutral-400 font-light flex items-center gap-2 py-2 px-3 rounded-2xl bg-white/[0.03]">
+                      <span>Thinking...</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-pulse" />
+                    </div>
+                  </div>
+                )}
+
+                {/* Message 3: Agent Intelligent Follow-up / Objection Handling */}
+                <div
+                  className={`flex items-start gap-3 transition-all duration-500 ease-out ${
+                    animStage >= 3
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-3 pointer-events-none"
+                  }`}
+                >
                   <div className="relative w-6 h-6 rounded-full overflow-hidden flex-shrink-0 mt-0.5 opacity-85">
                     <Image
                       src="/images/agent-orb-clean.png"
@@ -256,21 +304,14 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
                       className="object-contain"
                     />
                   </div>
-                  
-                  {isThinking ? (
-                    <div className="text-xs sm:text-[13px] text-neutral-400 font-light flex items-center gap-2 py-2 px-3 rounded-2xl bg-white/[0.03]">
-                      <span>Thinking...</span>
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-pulse" />
-                    </div>
-                  ) : (
-                    <div className="text-xs sm:text-[13px] text-neutral-300 font-light leading-relaxed bg-white/[0.03] p-3.5 rounded-2xl rounded-tl-sm border border-white/[0.05]">
-                      {activeScenario.agentReply}
-                    </div>
-                  )}
+                  <div className="text-xs sm:text-[13px] text-neutral-200 font-light leading-relaxed bg-white/[0.04] p-3.5 rounded-2xl rounded-tl-sm border border-white/[0.06] max-w-[85%]">
+                    {activeScenario.agentReply}
+                  </div>
                 </div>
+
               </div>
 
-              {/* Bottom Input Bar matching Bild 1 */}
+              {/* Bottom Input Bar */}
               <div className="relative z-10">
                 <div className="w-full rounded-full bg-[#12151D] border border-white/[0.09] px-4 py-2.5 flex items-center justify-between text-neutral-400 shadow-inner">
                   <span className="text-xs sm:text-[13px] font-light text-neutral-500">
@@ -286,6 +327,7 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
                     </button>
                     <button
                       type="button"
+                      onClick={startSequentialAnimation}
                       className="w-6 h-6 rounded-full bg-[#1F2430] border border-white/10 text-white flex items-center justify-center hover:bg-[#282F3E] transition-colors"
                       aria-label="Skicka meddelande"
                     >
