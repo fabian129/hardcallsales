@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -147,7 +147,7 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
         </div>
 
         {/* Main Interactive Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Column: 4 Real Commercial Scenarios */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-8">
@@ -192,13 +192,13 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
 
           {/* Right Column: 1:1 Recreation of Bild 1 with Sequential Soft Fade-in */}
           <div className="lg:col-span-7 flex justify-center">
-            <div className="w-full max-w-[560px] rounded-[32px] bg-[#0C0E14] border border-white/[0.12] p-6 sm:p-8 shadow-[0_30px_90px_rgba(0,0,0,0.95)] relative overflow-hidden">
+            <div className="w-full max-w-[560px] h-[540px] sm:h-[560px] flex flex-col justify-between rounded-[32px] bg-[#0C0E14] border border-white/[0.12] p-6 sm:p-7 shadow-[0_30px_90px_rgba(0,0,0,0.95)] relative overflow-hidden">
               
               {/* Ambient Light Bleed on Left Edge */}
               <div className="absolute top-1/3 left-[-30px] w-24 h-48 bg-white/[0.06] blur-2xl rounded-full pointer-events-none" />
 
               {/* Playground Header */}
-              <div className="flex items-center justify-between pb-6 mb-6 border-b border-white/[0.08] relative z-10">
+              <div className="flex items-center justify-between pb-5 mb-4 border-b border-white/[0.08] relative z-10 flex-shrink-0">
                 <div className="flex items-center gap-3">
                   {/* Chrome Orb Avatar */}
                   <div className="relative w-8 h-8 rounded-full overflow-hidden shadow-[0_0_15px_rgba(255,255,255,0.25)] flex-shrink-0">
@@ -230,15 +230,15 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
                 </button>
               </div>
 
-              {/* Message Stream: Sequential Soft Fade-in */}
-              <div className="space-y-4 mb-8 relative z-10 min-h-[290px] flex flex-col justify-start">
+              {/* Message Stream: Sequential Soft Fade-in (100% Static Container with Zero Layout Shift) */}
+              <div className="flex-1 min-h-0 flex flex-col justify-start space-y-3.5 relative z-10">
                 
                 {/* Message 1: Agent Initial Outreach */}
                 <div
-                  className={`flex items-start gap-3 transition-all duration-500 ease-out ${
+                  className={`flex items-start gap-3 transition-all duration-400 ease-out ${
                     animStage >= 1
                       ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-3 pointer-events-none"
+                      : "opacity-0 translate-y-1.5 pointer-events-none"
                   }`}
                 >
                   <div className="relative w-6 h-6 rounded-full overflow-hidden flex-shrink-0 mt-0.5 opacity-85">
@@ -256,10 +256,10 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
 
                 {/* Message 2: Prospect Response (Right Aligned) */}
                 <div
-                  className={`flex justify-end transition-all duration-500 ease-out ${
+                  className={`flex justify-end transition-all duration-400 ease-out ${
                     animStage >= 2
                       ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-3 pointer-events-none"
+                      : "opacity-0 translate-y-1.5 pointer-events-none"
                   }`}
                 >
                   <div className="max-w-[82%] rounded-2xl rounded-tr-sm bg-[#161922] border border-white/[0.08] p-3.5 text-xs sm:text-[13px] text-neutral-200 font-light leading-relaxed shadow-lg">
@@ -270,9 +270,15 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Thinking Indicator (while stage === 2.5) */}
-                {animStage === 2.5 && (
-                  <div className="flex items-start gap-3 transition-all duration-300 animate-fadeIn">
+                {/* Message 3 Slot: Occupies stable height; Thinking indicator overlays smoothly */}
+                <div className="relative flex items-start">
+                  
+                  {/* Thinking Indicator (Only visible during stage 2.5, perfectly positioned with zero layout shift) */}
+                  <div
+                    className={`absolute left-0 top-0 flex items-start gap-3 transition-opacity duration-200 pointer-events-none z-10 ${
+                      animStage === 2.5 ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
                     <div className="relative w-6 h-6 rounded-full overflow-hidden flex-shrink-0 mt-0.5 opacity-85">
                       <Image
                         src="/images/agent-orb-clean.png"
@@ -281,38 +287,39 @@ export const LinkedClientPlaygroundSection: React.FC = () => {
                         className="object-contain"
                       />
                     </div>
-                    <div className="text-xs sm:text-[13px] text-neutral-400 font-light flex items-center gap-2 py-2 px-3 rounded-2xl bg-white/[0.03]">
+                    <div className="text-xs sm:text-[13px] text-neutral-400 font-light flex items-center gap-2 py-2 px-3 rounded-2xl bg-white/[0.03] border border-white/[0.05]">
                       <span>Thinking...</span>
                       <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-pulse" />
                     </div>
                   </div>
-                )}
 
-                {/* Message 3: Agent Intelligent Follow-up / Objection Handling */}
-                <div
-                  className={`flex items-start gap-3 transition-all duration-500 ease-out ${
-                    animStage >= 3
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-3 pointer-events-none"
-                  }`}
-                >
-                  <div className="relative w-6 h-6 rounded-full overflow-hidden flex-shrink-0 mt-0.5 opacity-85">
-                    <Image
-                      src="/images/agent-orb-clean.png"
-                      alt="Sales Agent Orb"
-                      fill
-                      className="object-contain"
-                    />
+                  {/* Message 3: Agent Follow-up / Objection Handling */}
+                  <div
+                    className={`flex items-start gap-3 w-full transition-all duration-400 ease-out ${
+                      animStage >= 3
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-1.5 pointer-events-none"
+                    }`}
+                  >
+                    <div className="relative w-6 h-6 rounded-full overflow-hidden flex-shrink-0 mt-0.5 opacity-85">
+                      <Image
+                        src="/images/agent-orb-clean.png"
+                        alt="Sales Agent Orb"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="text-xs sm:text-[13px] text-neutral-200 font-light leading-relaxed bg-white/[0.04] p-3.5 rounded-2xl rounded-tl-sm border border-white/[0.06] max-w-[85%]">
+                      {activeScenario.agentReply}
+                    </div>
                   </div>
-                  <div className="text-xs sm:text-[13px] text-neutral-200 font-light leading-relaxed bg-white/[0.04] p-3.5 rounded-2xl rounded-tl-sm border border-white/[0.06] max-w-[85%]">
-                    {activeScenario.agentReply}
-                  </div>
+
                 </div>
 
               </div>
 
               {/* Bottom Input Bar */}
-              <div className="relative z-10">
+              <div className="relative z-10 flex-shrink-0 pt-3">
                 <div className="w-full rounded-full bg-[#12151D] border border-white/[0.09] px-4 py-2.5 flex items-center justify-between text-neutral-400 shadow-inner">
                   <span className="text-xs sm:text-[13px] font-light text-neutral-500">
                     Ask the agent
