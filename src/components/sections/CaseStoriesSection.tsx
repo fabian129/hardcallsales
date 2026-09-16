@@ -24,18 +24,47 @@ export function StoryCard({ story }: { story: typeof HCS_STORIES[0] }) {
       className={`w-full relative rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 border flex flex-col justify-between cursor-pointer select-none text-left group ${
         isOpen
           ? "bg-[#0D0D11]/95 border-white/[0.18] shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_28px_60px_rgba(0,0,0,0.85)]"
-          : "bg-[#09090C]/80 hover:bg-[#0C0C10]/90 border-white/[0.07] hover:border-white/[0.15] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_36px_rgba(0,0,0,0.7)] backdrop-blur-2xl"
+          : "bg-[#09090C]/85 hover:bg-[#0C0C10]/95 border-white/[0.07] hover:border-white/[0.15] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_36px_rgba(0,0,0,0.7)] backdrop-blur-2xl"
       }`}
     >
-      {/* ── CARD TOP RAIL: LOGO & PRIMARY METRIC ── */}
-      <div className="relative z-10 px-7 pt-7 pb-6 sm:px-10 sm:pt-9 sm:pb-8 flex items-start justify-between gap-6 border-b border-white/[0.04]">
-        {/* Much Larger Left-Aligned Authentic Logo */}
-        <div className="h-16 sm:h-20 flex items-center justify-start">
+      {/* ── ATMOSPHERIC AURA: "Kladda lite i mitten, bakom" ── */}
+      <div
+        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 sm:w-96 h-72 sm:h-96 rounded-full blur-[80px] sm:blur-[100px] opacity-25 group-hover:opacity-40 transition-opacity duration-500"
+        style={{
+          background: `radial-gradient(circle, ${story.accent || "#8B5CF6"} 0%, transparent 70%)`,
+        }}
+      />
+
+      {/* ── CARD TOP (ABOVE THE LINE): EYEBROW, LOGO & PRIMARY METRIC ── */}
+      <div className="relative z-10 px-7 pt-7 pb-6 sm:px-10 sm:pt-8 sm:pb-7 border-b border-white/[0.05]">
+        {/* Top utility row: Eyebrow on left, Primary Stat & toggle cue on right */}
+        <div className="flex items-center justify-between gap-4 mb-5">
+          <div className="flex items-center gap-2 sm:gap-2.5 text-[10.5px] sm:text-[11px] font-mono tracking-widest text-neutral-400 uppercase">
+            <span className="text-neutral-300 font-medium">{story.industry}</span>
+            <span className="w-1 h-1 rounded-full bg-neutral-600 shrink-0" />
+            <span className="hidden xs:inline">{story.stats.secondary}</span>
+            <span className="hidden xs:inline w-1 h-1 rounded-full bg-neutral-600 shrink-0" />
+            <span className="text-neutral-400 hidden sm:inline">{story.stats.metric}</span>
+          </div>
+
+          <div className="flex items-center gap-3 shrink-0">
+            <span className="text-xs font-mono text-neutral-200 tracking-wide font-medium">
+              {story.stats.primary}
+            </span>
+            <span className="w-1 h-1 rounded-full bg-neutral-600 inline-block" />
+            <span className="text-xs font-mono text-neutral-400 transition-transform duration-200 group-hover:text-white">
+              {isOpen ? "−" : "+"}
+            </span>
+          </div>
+        </div>
+
+        {/* Much Larger Left-Aligned Authentic Logo (Full Color) */}
+        <div className="h-14 sm:h-18 flex items-center justify-start">
           {story.logo ? (
             <img
               src={story.logo}
               alt={story.client}
-              className="max-h-14 sm:max-h-18 w-auto max-w-[240px] sm:max-w-[300px] object-contain object-left brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+              className="max-h-12 sm:max-h-16 w-auto max-w-[240px] sm:max-w-[300px] object-contain object-left opacity-95 group-hover:opacity-100 transition-opacity duration-300"
             />
           ) : (
             <span className="text-2xl sm:text-3xl font-light tracking-wider text-white uppercase font-sans">
@@ -43,33 +72,13 @@ export function StoryCard({ story }: { story: typeof HCS_STORIES[0] }) {
             </span>
           )}
         </div>
-
-        {/* Quiet Metric & Toggle Cue */}
-        <div className="flex items-center gap-3 pt-1 shrink-0">
-          <span className="text-xs font-mono text-neutral-300 tracking-wide">
-            {story.stats.primary}
-          </span>
-          <span className="w-1 h-1 rounded-full bg-neutral-600 inline-block" />
-          <span className="text-xs font-mono text-neutral-400 transition-transform duration-200 group-hover:text-white">
-            {isOpen ? "−" : "+"}
-          </span>
-        </div>
       </div>
 
-      {/* ── CARD BODY (LEFT-ALIGNED & QUIETER) ── */}
+      {/* ── CARD BODY (LEFT-ALIGNED & QUIETER, BELOW THE LINE) ── */}
       <div className="relative z-10 px-7 py-7 sm:px-10 sm:py-8 flex flex-col justify-between flex-1">
         <div>
-          {/* Eyebrow Above Headline */}
-          <div className="flex items-center gap-2.5 text-[11px] font-mono tracking-widest text-neutral-400 uppercase mb-2.5">
-            <span>{story.industry}</span>
-            <span className="w-1 h-1 rounded-full bg-neutral-600" />
-            <span>{story.stats.secondary}</span>
-            <span className="w-1 h-1 rounded-full bg-neutral-600" />
-            <span className="text-neutral-300">{story.stats.metric}</span>
-          </div>
-
           {/* Smaller, More Refined Headline */}
-          <h3 className="text-lg sm:text-xl font-normal text-white tracking-tight leading-snug mb-2">
+          <h3 className="text-lg sm:text-xl font-normal text-white tracking-tight leading-snug mb-2.5">
             {story.event}
           </h3>
 

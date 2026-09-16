@@ -69,7 +69,7 @@ export const HCS_STORIES: CaseStory[] = [
       target: "Fastighetsägare, fastighetschefer och styrelser i bostadsrättsföreningar",
       outcome: "Högt inflöde av bokade besök, integrerat i Repipes lokala säljares kalendrar"
     },
-    accent: "#9333EA",
+    accent: "#0EA5E9",
     href: "/case",
   },
   {
@@ -86,7 +86,7 @@ export const HCS_STORIES: CaseStory[] = [
       target: "VD, ekonomichefer och HR-ansvariga inom svenskt näringsliv",
       outcome: "Snabb marknadspenetration för den nya tjänsten och bevisad hög show-rate"
     },
-    accent: "#7851A9",
+    accent: "#E11D48",
     href: "/case",
   },
   {
@@ -103,7 +103,7 @@ export const HCS_STORIES: CaseStory[] = [
       target: "Butikschefer, IT-chefer och logistikansvariga inom nordisk detaljhandel",
       outcome: "Etablerade strategiska dialoger och påskyndade införandet av ESL-lösningar"
     },
-    accent: "#7851A9",
+    accent: "#EA580C",
     href: "/case",
   },
   {
