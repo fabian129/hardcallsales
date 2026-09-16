@@ -21,19 +21,32 @@ export function StoryCard({ story }: { story: typeof HCS_STORIES[0] }) {
           setIsOpen(!isOpen);
         }
       }}
-      className={`w-full relative rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 border flex flex-col justify-between cursor-pointer select-none group ${
+      className={`w-full relative rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 border flex flex-col justify-between cursor-pointer select-none text-left group ${
         isOpen
           ? "bg-[#0D0D11]/95 border-white/[0.18] shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_28px_60px_rgba(0,0,0,0.85)]"
-          : "bg-[#09090C]/80 hover:bg-[#0C0C10]/90 border-white/[0.07] hover:border-white/[0.16] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_36px_rgba(0,0,0,0.7)] backdrop-blur-2xl"
+          : "bg-[#09090C]/80 hover:bg-[#0C0C10]/90 border-white/[0.07] hover:border-white/[0.15] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_36px_rgba(0,0,0,0.7)] backdrop-blur-2xl"
       }`}
     >
-      {/* ── TOP TASTEFUL EYEBROW ROW ── */}
-      <div className="relative z-10 px-8 pt-7 pb-5 sm:px-10 sm:pt-8 sm:pb-6 flex items-center justify-between gap-4 border-b border-white/[0.05]">
-        <span className="text-[11px] font-mono tracking-widest text-neutral-400 uppercase">
-          {story.industry}
-        </span>
-        <div className="flex items-center gap-3">
-          <span className="text-[11px] font-mono text-neutral-300 tracking-wide">
+      {/* ── CARD TOP RAIL: LOGO & PRIMARY METRIC ── */}
+      <div className="relative z-10 px-7 pt-7 pb-6 sm:px-10 sm:pt-9 sm:pb-8 flex items-start justify-between gap-6 border-b border-white/[0.04]">
+        {/* Much Larger Left-Aligned Authentic Logo */}
+        <div className="h-16 sm:h-20 flex items-center justify-start">
+          {story.logo ? (
+            <img
+              src={story.logo}
+              alt={story.client}
+              className="max-h-14 sm:max-h-18 w-auto max-w-[240px] sm:max-w-[300px] object-contain object-left brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            />
+          ) : (
+            <span className="text-2xl sm:text-3xl font-light tracking-wider text-white uppercase font-sans">
+              {story.client}
+            </span>
+          )}
+        </div>
+
+        {/* Quiet Metric & Toggle Cue */}
+        <div className="flex items-center gap-3 pt-1 shrink-0">
+          <span className="text-xs font-mono text-neutral-300 tracking-wide">
             {story.stats.primary}
           </span>
           <span className="w-1 h-1 rounded-full bg-neutral-600 inline-block" />
@@ -43,111 +56,98 @@ export function StoryCard({ story }: { story: typeof HCS_STORIES[0] }) {
         </div>
       </div>
 
-      {/* ── CARD CENTERPIECE ── */}
-      <div className="relative z-10 px-8 py-10 sm:px-12 sm:py-12 flex flex-col items-center justify-center text-center flex-1">
-        {/* Generous Large Client Logo in Dead Center */}
-        <div className="h-16 sm:h-20 flex items-center justify-center mb-7 sm:mb-8">
-          {story.logo ? (
-            <img
-              src={story.logo}
-              alt={story.client}
-              className="max-h-12 sm:max-h-16 w-auto max-w-[220px] sm:max-w-[260px] object-contain brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-            />
-          ) : (
-            <span className="text-xl sm:text-2xl font-normal tracking-wider text-white uppercase font-sans">
-              {story.client}
-            </span>
+      {/* ── CARD BODY (LEFT-ALIGNED & QUIETER) ── */}
+      <div className="relative z-10 px-7 py-7 sm:px-10 sm:py-8 flex flex-col justify-between flex-1">
+        <div>
+          {/* Eyebrow Above Headline */}
+          <div className="flex items-center gap-2.5 text-[11px] font-mono tracking-widest text-neutral-400 uppercase mb-2.5">
+            <span>{story.industry}</span>
+            <span className="w-1 h-1 rounded-full bg-neutral-600" />
+            <span>{story.stats.secondary}</span>
+            <span className="w-1 h-1 rounded-full bg-neutral-600" />
+            <span className="text-neutral-300">{story.stats.metric}</span>
+          </div>
+
+          {/* Smaller, More Refined Headline */}
+          <h3 className="text-lg sm:text-xl font-normal text-white tracking-tight leading-snug mb-2">
+            {story.event}
+          </h3>
+
+          {/* Smaller Left-Aligned Teaser Body */}
+          <p className="text-xs sm:text-[13px] text-neutral-400 font-light leading-relaxed max-w-xl mb-4 line-clamp-2">
+            {story.teaser}
+          </p>
+
+          {/* Discreet Hint */}
+          <div className="flex items-center gap-1.5 text-[10.5px] font-mono tracking-wider text-neutral-500 group-hover:text-neutral-400 transition-colors uppercase pt-1">
+            <span>{isOpen ? "Dölj kundberättelse" : "Klicka för att expandera uppdraget"}</span>
+            <span className="text-xs">{isOpen ? "↑" : "→"}</span>
+          </div>
+
+          {/* ── IN-BOX EXPANDED CONTENT ── */}
+          {isOpen && (
+            <div
+              className="w-full mt-7 pt-7 border-t border-white/[0.06] text-left animate-in fade-in duration-200"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Full Story from hardcallsales.se */}
+              <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-5 sm:p-7 mb-5">
+                <span className="block text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-2.5 font-medium">
+                  BAKGRUND &amp; SAMARBETE
+                </span>
+                <p className="text-[13.5px] sm:text-[14.5px] text-neutral-200 leading-relaxed font-sans font-light">
+                  {story.fullStory}
+                </p>
+              </div>
+
+              {/* Delivery Scope & Target Details Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 sm:p-5 rounded-xl bg-black/40 border border-white/[0.04] mb-5">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 block mb-1">
+                    OMFATTNING
+                  </span>
+                  <span className="text-xs text-neutral-300 font-light leading-relaxed block">
+                    {story.deliveryDetails.scope}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 block mb-1">
+                    MÅLGRUPP
+                  </span>
+                  <span className="text-xs text-neutral-300 font-light leading-relaxed block">
+                    {story.deliveryDetails.target}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block mb-1">
+                    LEVERERAT UTFALL
+                  </span>
+                  <span className="text-xs text-white font-medium leading-relaxed block">
+                    {story.deliveryDetails.outcome}
+                  </span>
+                </div>
+              </div>
+
+              {/* Action Row */}
+              <div className="flex items-center justify-between pt-1">
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="text-xs font-mono uppercase tracking-wider text-neutral-400 hover:text-white transition-colors cursor-pointer"
+                >
+                  Stäng [ × ]
+                </button>
+                <Link
+                  href="/boka-mote"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black font-medium text-xs tracking-wider uppercase hover:bg-neutral-200 transition-all shadow-md"
+                >
+                  <span>Boka liknande upplägg</span>
+                  <ArrowRight size={13} />
+                </Link>
+              </div>
+            </div>
           )}
         </div>
-
-        {/* Quiet Secondary Metrics Eyebrow */}
-        <div className="flex items-center gap-3 text-xs font-mono text-neutral-400 mb-3.5">
-          <span>{story.stats.secondary}</span>
-          <span className="w-1 h-1 rounded-full bg-neutral-600" />
-          <span>{story.stats.metric}</span>
-        </div>
-
-        {/* Headline Directly Under Logo */}
-        <h3 className="text-xl sm:text-2xl lg:text-[26px] font-normal text-white tracking-tight leading-snug max-w-xl mx-auto mb-3.5">
-          {story.event}
-        </h3>
-
-        {/* Minimal Restrained Teaser Copy */}
-        <p className="text-xs sm:text-[13.5px] text-neutral-400 font-light leading-relaxed max-w-md mx-auto mb-6 line-clamp-2">
-          {story.teaser}
-        </p>
-
-        {/* Quiet Expand Hint */}
-        <div className="flex items-center gap-2 text-[11px] font-mono tracking-widest text-neutral-500 group-hover:text-neutral-300 transition-colors uppercase">
-          <span>{isOpen ? "Stäng uppdrag" : "Klicka för hela uppdraget"}</span>
-          <span className="text-xs transition-transform duration-200">
-            {isOpen ? "↑" : "↓"}
-          </span>
-        </div>
-
-        {/* ── IN-BOX EXPANDED CONTENT ── */}
-        {isOpen && (
-          <div
-            className="w-full mt-8 pt-8 border-t border-white/[0.06] text-left animate-in fade-in duration-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Full Story from hardcallsales.se */}
-            <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 sm:p-8 mb-6">
-              <span className="block text-[11px] font-mono uppercase tracking-widest text-neutral-400 mb-3 font-medium">
-                BAKGRUND &amp; UPPDRAG
-              </span>
-              <p className="text-[14px] sm:text-[15px] text-neutral-200 leading-relaxed font-sans font-light">
-                {story.fullStory}
-              </p>
-            </div>
-
-            {/* Delivery Scope & Target Details Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 sm:p-6 rounded-2xl bg-black/40 border border-white/[0.04] mb-6">
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 block mb-1.5">
-                  OMFATTNING
-                </span>
-                <span className="text-xs sm:text-[13px] text-neutral-300 font-light leading-relaxed block">
-                  {story.deliveryDetails.scope}
-                </span>
-              </div>
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 block mb-1.5">
-                  MÅLGRUPP
-                </span>
-                <span className="text-xs sm:text-[13px] text-neutral-300 font-light leading-relaxed block">
-                  {story.deliveryDetails.target}
-                </span>
-              </div>
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block mb-1.5">
-                  LEVERERAT UTFALL
-                </span>
-                <span className="text-xs sm:text-[13px] text-white font-medium leading-relaxed block">
-                  {story.deliveryDetails.outcome}
-                </span>
-              </div>
-            </div>
-
-            {/* Action Row */}
-            <div className="flex items-center justify-between pt-2">
-              <button
-                type="button"
-                onClick={() => setIsOpen(false)}
-                className="text-xs font-mono uppercase tracking-wider text-neutral-400 hover:text-white transition-colors cursor-pointer"
-              >
-                Stäng [ × ]
-              </button>
-              <Link
-                href="/boka-mote"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-medium text-xs tracking-wider uppercase hover:bg-neutral-200 transition-all shadow-md"
-              >
-                <span>Boka liknande upplägg</span>
-                <ArrowRight size={13} />
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
