@@ -92,7 +92,7 @@ export default function CasePage() {
       {/* ── 2. CASE GRID (2x2x2) ── */}
       <section className="w-full py-20 sm:py-28 relative">
         <div className="max-w-[1520px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-start">
             {HCS_STORIES.map((story, i) => (
               <StoryCard key={i} story={story} />
             ))}

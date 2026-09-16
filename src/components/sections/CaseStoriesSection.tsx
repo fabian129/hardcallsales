@@ -2,33 +2,57 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, TrendingUp, CheckCircle2 } from "lucide-react";
+import { ArrowRight, TrendingUp, CheckCircle2, ChevronDown, ChevronUp, Sparkles, X } from "lucide-react";
 import { HCS_STORIES, type CaseStory } from "@/data/caseStoriesData";
 
 export { HCS_STORIES };
 
 export function StoryCard({ story }: { story: typeof HCS_STORIES[0] }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="w-full h-[480px] sm:h-[520px] relative rounded-[28px] overflow-hidden group cursor-pointer border border-white/10 bg-[#121212] transition-all duration-300 hover:border-white/25 shadow-2xl flex flex-col justify-between">
-      {/* Background Image with slow zoom */}
-      <img
-        src={story.image}
-        alt={story.client}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 opacity-40 group-hover:opacity-60 pointer-events-none"
+    <div
+      className={`w-full relative rounded-[28px] overflow-hidden transition-all duration-300 border shadow-2xl flex flex-col justify-between group ${
+        isOpen
+          ? "bg-[#111116] border-[#7851A9]/60 shadow-[0_0_50px_rgba(120,81,169,0.18)]"
+          : "bg-[#0E0E12] border-white/10 hover:border-white/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)]"
+      }`}
+    >
+      {/* ── AMBIENT ATMOSPHERIC BACKGROUND (NO STOCK PHOTOS) ── */}
+      {/* Top-Right Purple Aura Bloom */}
+      <div
+        className={`absolute -top-20 -right-20 w-72 h-72 rounded-full pointer-events-none transition-all duration-500 blur-[80px] ${
+          isOpen ? "bg-[#7851A9]/25 scale-125" : "bg-[#7851A9]/10 group-hover:bg-[#7851A9]/18"
+        }`}
       />
+      {/* Bottom-Left Secondary Sub-Glow */}
+      <div className="absolute -bottom-24 -left-24 w-60 h-60 rounded-full bg-purple-950/20 blur-[70px] pointer-events-none" />
 
-      {/* Dark Vignette Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent pointer-events-none" />
+      {/* Subtle Precision Dot Matrix Background */}
+      <svg
+        className="absolute inset-0 w-full h-full opacity-[0.035] pointer-events-none select-none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <pattern id={`dot-matrix-${story.id}`} width="28" height="28" patternUnits="userSpaceOnUse">
+            <circle cx="14" cy="14" r="1.2" fill="#FFFFFF" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill={`url(#dot-matrix-${story.id})`} />
+      </svg>
 
-      {/* Top Badges Row */}
-      <div className="relative z-10 p-6 sm:p-7 flex items-center justify-between gap-4">
-        {/* Client Badge with Real Logo */}
-        <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-black/75 backdrop-blur-xl border border-white/15 shadow-lg">
+      {/* Top Border Hairline Highlight */}
+      <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
+
+      {/* ── CARD HEADER & LOGO PODIUM ── */}
+      <div className="relative z-10 p-6 sm:p-7 flex items-center justify-between gap-4 border-b border-white/[0.06]">
+        {/* Architectural Emblem Badge with Authentic Client Logo */}
+        <div className="inline-flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/[0.04] backdrop-blur-xl border border-white/[0.1] shadow-inner">
           {story.logo ? (
             <img
               src={story.logo}
               alt={story.client}
-              className="h-4 sm:h-5 w-auto max-w-[100px] object-contain brightness-0 invert opacity-95"
+              className="h-4 sm:h-5 w-auto max-w-[110px] object-contain brightness-0 invert opacity-95 group-hover:opacity-100 transition-opacity"
             />
           ) : (
             <div className="inline-flex items-center gap-2">
@@ -38,50 +62,128 @@ export function StoryCard({ story }: { story: typeof HCS_STORIES[0] }) {
               </span>
             </div>
           )}
-          <span className="text-[11px] text-[#A8A8A8] font-normal border-l border-white/15 pl-2.5">
+          <span className="text-[11px] text-[#A8A8A8] font-normal border-l border-white/15 pl-2.5 font-sans">
             {story.industry}
           </span>
         </div>
 
         {/* Quick Key Stat Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#7851A9]/20 backdrop-blur-md border border-[#7851A9]/40 text-white font-mono text-xs font-semibold">
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#7851A9]/20 backdrop-blur-md border border-[#7851A9]/40 text-white font-mono text-xs font-semibold shrink-0">
           <TrendingUp size={13} className="text-[#B794F4]" />
           <span>{story.stats.primary}</span>
         </div>
       </div>
 
-      {/* Bottom Content Area */}
-      <div className="relative z-10 p-6 sm:p-8 flex flex-col justify-end">
-        {/* Metric Chips Row */}
-        <div className="flex flex-wrap items-center gap-2 mb-3.5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/10 backdrop-blur-md text-[11px] font-medium text-white/90">
-            <CheckCircle2 size={12} className="text-[#7851A9]" />
-            <span>{story.stats.secondary}</span>
+      {/* ── CARD BODY ── */}
+      <div className="relative z-10 p-6 sm:p-8 flex flex-col justify-between flex-1">
+        <div>
+          {/* Metric Chips Row */}
+          <div className="flex flex-wrap items-center gap-2 mb-3.5">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.06] border border-white/[0.08] backdrop-blur-md text-[11px] font-medium text-white/90">
+              <CheckCircle2 size={12} className="text-[#7851A9]" />
+              <span>{story.stats.secondary}</span>
+            </div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.06] border border-white/[0.08] backdrop-blur-md text-[11px] font-medium text-white/90">
+              <CheckCircle2 size={12} className="text-[#7851A9]" />
+              <span>{story.stats.metric}</span>
+            </div>
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/10 backdrop-blur-md text-[11px] font-medium text-white/90">
-            <CheckCircle2 size={12} className="text-[#7851A9]" />
-            <span>{story.stats.metric}</span>
-          </div>
+
+          {/* Case Headline */}
+          <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug mb-3">
+            {story.event}
+          </h3>
+
+          {/* Teaser Summary */}
+          <p className="text-xs sm:text-[13.5px] text-[#A0A0A0] leading-relaxed mb-5">
+            {story.teaser}
+          </p>
+
+          {/* ── IN-BOX EXPANDED CONTENT ── */}
+          {isOpen && (
+            <div className="mt-5 pt-5 border-t border-white/[0.08] animate-in fade-in slide-in-from-top-2 duration-300">
+              {/* Full Authentic Story from hardcallsales.se */}
+              <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-5 sm:p-6 mb-5 relative">
+                <div className="absolute top-4 right-4 opacity-20">
+                  <Sparkles size={18} className="text-[#B794F4]" />
+                </div>
+                <span className="block text-[10px] font-mono uppercase tracking-widest text-[#B794F4] mb-2 font-semibold">
+                  HELA UPPDRAGSBERÄTTELSEN
+                </span>
+                <p className="text-[13.5px] sm:text-[14.5px] text-[#E0E0E6] leading-relaxed font-sans font-normal">
+                  {story.fullStory}
+                </p>
+              </div>
+
+              {/* Delivery Scope & Target Details Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-black/40 border border-white/[0.05] mb-5">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#8A8A90] block mb-1">
+                    OMFATTNING
+                  </span>
+                  <span className="text-xs text-white/95 font-medium leading-tight block">
+                    {story.deliveryDetails.scope}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#8A8A90] block mb-1">
+                    MÅLGRUPP
+                  </span>
+                  <span className="text-xs text-white/95 font-medium leading-tight block">
+                    {story.deliveryDetails.target}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#B794F4] block mb-1">
+                    LEVERERAT UTFALL
+                  </span>
+                  <span className="text-xs text-[#E9D8FD] font-medium leading-tight block">
+                    {story.deliveryDetails.outcome}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Case Headline */}
-        <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight leading-snug mb-2.5 group-hover:text-white transition-colors">
-          {story.event}
-        </h3>
+        {/* ── CARD FOOTER ACTIONS ── */}
+        <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between gap-3 mt-4">
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer ${
+              isOpen
+                ? "bg-white text-black hover:bg-neutral-200 shadow-lg"
+                : "bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/10 hover:border-white/20"
+            }`}
+          >
+            {isOpen ? (
+              <>
+                <span>Dölj uppdrag</span>
+                <ChevronUp size={14} className="text-black" />
+              </>
+            ) : (
+              <>
+                <span>Läs hela kundcaset</span>
+                <ChevronDown size={14} className="text-[#B794F4]" />
+              </>
+            )}
+          </button>
 
-        {/* Description */}
-        <p className="text-xs sm:text-[13.5px] text-[#B0B0B0] leading-relaxed max-w-2xl mb-4 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
-          {story.description}
-        </p>
-
-        {/* Read More Link */}
-        <Link
-          href={story.href}
-          className="inline-flex items-center gap-2 text-xs sm:text-[13px] font-bold text-[#B794F4] group-hover:text-white transition-colors"
-        >
-          <span>Läs hela kundcaset</span>
-          <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-        </Link>
+          {isOpen ? (
+            <Link
+              href="/boka-mote"
+              className="inline-flex items-center gap-2 text-xs sm:text-[13px] font-bold text-[#B794F4] hover:text-white transition-colors"
+            >
+              <span>Boka liknande upplägg</span>
+              <ArrowRight size={14} />
+            </Link>
+          ) : (
+            <span className="text-[11px] font-mono text-[#7A7A80] uppercase tracking-wider hidden sm:inline">
+              KLICKA FÖR ATT EXPANDERA
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -147,7 +249,7 @@ export const CaseStoriesSection: React.FC = () => {
         </div>
 
         {/* 2x2x2 Box Grid (3 rows x 2 columns) with identical visual cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-start">
           {HCS_STORIES.map((story, i) => (
             <StoryCard key={i} story={story} />
           ))}
