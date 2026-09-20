@@ -1,27 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Container } from "@/components/ui/Container";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check, Calendar } from "lucide-react";
 import { openCalModal, DEFAULT_CAL_LINK } from "@/components/cal/CalProvider";
 
 export const ContactSplitSection: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<"email" | "calendar">("email");
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
   return (
-    <section id="kontakt" className="w-full bg-[#0D0D0D] py-28 sm:py-36 border-b border-[#1F1F1F] relative overflow-hidden">
+    <section id="kontakt" className="w-full bg-[#0D0D0D] py-24 sm:py-32 border-b border-[#1F1F1F] relative overflow-hidden">
       
       {/* Subtle vertical architectural grid lines matching the process section */}
       <div className="absolute inset-0 pointer-events-none max-w-[1500px] mx-auto grid grid-cols-4 border-x border-white/[0.03]">
@@ -31,15 +17,15 @@ export const ContactSplitSection: React.FC = () => {
       </div>
 
       <Container size="wide" className="relative z-10">
-        {/* Large White Container Box - enlarged and more spacious */}
-        <div className="max-w-[1280px] mx-auto rounded-[36px] bg-white p-7 sm:p-10 lg:p-12 xl:p-14 shadow-2xl border border-[#EBEBEB]">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-stretch">
+        {/* Large White Container Box */}
+        <div className="max-w-[1280px] mx-auto rounded-[36px] bg-white p-6 sm:p-8 lg:p-10 xl:p-12 shadow-2xl border border-[#EBEBEB]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-stretch">
             
             {/* Left Side: Dark Hero Info Card */}
-            <div className="lg:col-span-5 rounded-[28px] bg-[#0D0D0D] text-white p-8 sm:p-10 lg:p-12 xl:p-13 flex flex-col justify-between shadow-xl min-h-[600px] lg:min-h-[660px]">
+            <div className="lg:col-span-5 rounded-[28px] bg-[#0D0D0D] text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between shadow-xl min-h-[480px]">
               <div>
                 {/* Official Hard Call Sales Brand Logo in Top-Left */}
-                <div className="flex items-center gap-3 mb-10 sm:mb-12">
+                <div className="flex items-center gap-3 mb-8 sm:mb-10">
                   <div className="w-4 h-4 bg-white [clip-path:polygon(100%_0,0_50%,100%_100%)] shrink-0" />
                   <div className="flex flex-col leading-none">
                     <span className="font-bold tracking-widest text-xs sm:text-[13px] uppercase text-white font-sans">HARD CALL</span>
@@ -48,7 +34,7 @@ export const ContactSplitSection: React.FC = () => {
                 </div>
 
                 {/* Main Heading */}
-                <h3 className="text-3xl sm:text-4xl lg:text-[40px] font-normal tracking-tight leading-[1.16] mb-6 sm:mb-7 text-white">
+                <h3 className="text-3xl sm:text-4xl font-normal tracking-tight leading-[1.16] mb-5 sm:mb-6 text-white">
                   <span className="text-[#7851A9] font-medium">Boka</span> ett samtal med<br />vår mötesexpert
                 </h3>
 
@@ -86,133 +72,62 @@ export const ContactSplitSection: React.FC = () => {
 
             </div>
 
-            {/* Right Side: Exact Form Layout from Prov: Kontaktytan - enlarged and comfortable */}
-            <div className="lg:col-span-7 bg-white p-3 sm:p-6 lg:p-8 xl:p-10 flex flex-col justify-between h-full">
-              <div className="flex-1 flex flex-col justify-between">
-                {/* Form Tabs */}
-                <div className="flex items-center gap-8 sm:gap-10 border-b border-[#E5E5E5] mb-8 sm:mb-10 pb-3 sm:pb-4">
-                  <button
-                    type="button"
-                    onClick={() => setActiveTab("email")}
-                    className={`text-sm sm:text-base font-semibold pb-3 sm:pb-4 -mb-3 sm:-mb-4 transition-colors cursor-pointer ${
-                      activeTab === "email"
-                        ? "text-black border-b-2 border-black"
-                        : "text-[#888888] hover:text-black"
-                    }`}
-                  >
-                    Kontakta via mejl
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setActiveTab("calendar");
-                      openCalModal();
-                    }}
-                    data-cal-link={DEFAULT_CAL_LINK}
-                    data-cal-config='{"layout":"month_view","theme":"dark"}'
-                    className={`text-sm sm:text-base font-semibold pb-3 sm:pb-4 -mb-3 sm:-mb-4 transition-colors cursor-pointer ${
-                      activeTab === "calendar"
-                        ? "text-black border-b-2 border-black"
-                        : "text-[#888888] hover:text-black"
-                    }`}
-                  >
-                    Boka direkt i kalendern
-                  </button>
+            {/* Right Side: Direct Cal.com Booking View (No Form) */}
+            <div className="lg:col-span-7 bg-white p-6 sm:p-8 lg:p-10 xl:p-12 flex flex-col justify-between rounded-[28px]">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-100 border border-neutral-200 text-neutral-700 text-xs font-mono uppercase tracking-wider mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#7851A9]" />
+                  <span>Direktbokning · 15 min</span>
                 </div>
 
-                {submitted ? (
-                  <div className="py-24 text-center my-auto">
-                    <h4 className="text-2xl sm:text-3xl font-bold text-black mb-3">Tack för ditt meddelande!</h4>
-                    <p className="text-base text-[#666666]">Vår mötesexpert hör av sig inom kort.</p>
-                  </div>
-                ) : activeTab === "calendar" ? (
-                  <div className="py-16 text-center my-auto flex flex-col items-center justify-center">
-                    <p className="text-base sm:text-lg font-semibold text-black mb-2">Boka 15 min strategisamtal</p>
-                    <p className="text-sm text-[#666666] max-w-sm mb-6">
-                      Välj en tid direkt i Malin Berlins kalender för ett förutsättningslöst introduktionsmöte.
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => openCalModal()}
-                      data-cal-link={DEFAULT_CAL_LINK}
-                      data-cal-config='{"layout":"month_view","theme":"dark"}'
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white text-xs font-semibold uppercase tracking-wider hover:bg-neutral-800 transition-all cursor-pointer shadow-md"
-                    >
-                      <span>Välj tid i kalendern</span>
-                      <ArrowRight size={14} />
-                    </button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="flex-1 flex flex-col justify-between">
-                    <div className="space-y-7 sm:space-y-8">
-                      <div>
-                        <label className="block text-xs sm:text-sm font-medium text-[#4B4B4B] mb-2">
-                          Förnamn
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="Ange ditt förnamn"
-                          value={formData.firstName}
-                          onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                          className="w-full pb-3 pt-1 border-b border-[#E0E0E0] focus:border-black text-sm sm:text-base text-black placeholder:text-[#AAAAAA] focus:outline-none transition-colors bg-transparent"
-                        />
-                      </div>
+                <h4 className="text-3xl sm:text-4xl font-normal tracking-tight text-[#111111] leading-[1.15] mb-5">
+                  Välj en tid direkt i kalendern
+                </h4>
 
-                      <div>
-                        <label className="block text-xs sm:text-sm font-medium text-[#4B4B4B] mb-2">
-                          Efternamn
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="Ange ditt efternamn"
-                          value={formData.lastName}
-                          onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                          className="w-full pb-3 pt-1 border-b border-[#E0E0E0] focus:border-black text-sm sm:text-base text-black placeholder:text-[#AAAAAA] focus:outline-none transition-colors bg-transparent"
-                        />
-                      </div>
+                <p className="text-sm sm:text-base text-[#555555] font-light leading-relaxed mb-8 max-w-xl">
+                  Ett förutsättningslöst 15-minuters strategisamtal direkt med Malin Berlin. Vi går igenom er ideala kundprofil, er nuvarande pipeline och visar hur en 3-månaders pilot fylls med kvalificerade möten.
+                </p>
 
-                      <div>
-                        <label className="block text-xs sm:text-sm font-medium text-[#4B4B4B] mb-2">
-                          Mejl
-                        </label>
-                        <input
-                          type="email"
-                          required
-                          placeholder="Ange din mejladress"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full pb-3 pt-1 border-b border-[#E0E0E0] focus:border-black text-sm sm:text-base text-black placeholder:text-[#AAAAAA] focus:outline-none transition-colors bg-transparent"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-xs sm:text-sm font-medium text-[#4B4B4B] mb-2">
-                          Vad kan vi hjälpa till med?
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Berätta kort om er försäljning i dag"
-                          value={formData.message}
-                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                          className="w-full pb-3 pt-1 border-b border-[#E0E0E0] focus:border-black text-sm sm:text-base text-black placeholder:text-[#AAAAAA] focus:outline-none transition-colors bg-transparent"
-                        />
-                      </div>
+                {/* Meeting Highlights */}
+                <div className="space-y-3.5 mb-8 sm:mb-10">
+                  <div className="flex items-center gap-3 text-sm sm:text-[15px] text-neutral-800">
+                    <div className="w-5 h-5 rounded-full bg-[#7851A9]/10 text-[#7851A9] flex items-center justify-center shrink-0">
+                      <Check className="w-3.5 h-3.5" />
                     </div>
-
-                    <div className="pt-10 sm:pt-12 mt-auto">
-                      <button
-                        type="submit"
-                        className="w-full py-4.5 sm:py-5 px-8 rounded-xl bg-[#0A0A0A] hover:bg-[#262626] text-white text-sm sm:text-base font-semibold tracking-wide transition-all shadow-md hover:shadow-lg cursor-pointer"
-                      >
-                        Skicka meddelande
-                      </button>
+                    <span>15 min digitalt videomöte via Google Meet / Teams</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm sm:text-[15px] text-neutral-800">
+                    <div className="w-5 h-5 rounded-full bg-[#7851A9]/10 text-[#7851A9] flex items-center justify-center shrink-0">
+                      <Check className="w-3.5 h-3.5" />
                     </div>
-                  </form>
-                )}
+                    <span>Genomgång av era målgrupper och beslutsfattare</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm sm:text-[15px] text-neutral-800">
+                    <div className="w-5 h-5 rounded-full bg-[#7851A9]/10 text-[#7851A9] flex items-center justify-center shrink-0">
+                      <Check className="w-3.5 h-3.5" />
+                    </div>
+                    <span>Konkret förslag på upplägg och prognos för en 3-månaders pilot</span>
+                  </div>
+                </div>
               </div>
 
+              {/* Direct Booking CTA */}
+              <div className="pt-6 sm:pt-8 border-t border-neutral-100 flex flex-col sm:flex-row sm:items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => openCalModal()}
+                  data-cal-link={DEFAULT_CAL_LINK}
+                  data-cal-config='{"layout":"month_view","theme":"dark"}'
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4.5 rounded-full bg-[#0A0A0A] hover:bg-[#222222] text-white text-sm sm:text-base font-semibold tracking-wide transition-all shadow-md hover:shadow-xl cursor-pointer group"
+                >
+                  <Calendar className="w-4 h-4 text-[#7851A9]" />
+                  <span>Boka möte här</span>
+                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </button>
+                <span className="text-xs text-neutral-400 font-light">
+                  Kostnadsfritt · Inga förberedelser krävs
+                </span>
+              </div>
             </div>
 
           </div>
