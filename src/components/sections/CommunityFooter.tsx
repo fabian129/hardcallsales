@@ -134,10 +134,19 @@ export const CommunityFooter: React.FC = () => {
         {/* Bottom Bar: Left HARD CALL + Right Copyright & Legal */}
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 pt-14 sm:pt-16 border-t border-white/[0.06]">
           
-          {/* HARD CALL Wordmark on Left */}
-          <div className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-widest text-white uppercase font-sans">
-            HARD CALL
-          </div>
+          {/* Authentic Hard Call Sales Brand Logo on Left */}
+          <Link href="/" className="flex items-center gap-3.5 group" aria-label="Hard Call Sales Hem">
+            <img
+              src="/images/logo/hcs-symbol.png"
+              alt="Hard Call Sales"
+              className="w-9 h-9 sm:w-10 sm:h-10 object-contain brightness-0 invert opacity-95 group-hover:opacity-100 transition-opacity"
+            />
+            <img
+              src="/images/logo/hcs-wordmark.png"
+              alt="The Hard Call Sales Group"
+              className="h-5 sm:h-6 w-auto object-contain brightness-0 invert opacity-95 group-hover:opacity-100 transition-opacity"
+            />
+          </Link>
 
           {/* Copyright & Legal Links on Right */}
           <div className="text-left sm:text-right flex flex-col gap-1.5 text-xs text-[#6E6E6E]">

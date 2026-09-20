@@ -24,13 +24,18 @@ export const ContactSplitSection: React.FC = () => {
             {/* Left Side: Dark Hero Info Card */}
             <div className="lg:col-span-5 rounded-[28px] bg-[#0D0D0D] text-white p-8 sm:p-10 lg:p-12 flex flex-col justify-between shadow-xl min-h-[480px]">
               <div>
-                {/* Official Hard Call Sales Brand Logo in Top-Left */}
+                {/* Official Hard Call Sales Brand Logo */}
                 <div className="flex items-center gap-3 mb-8 sm:mb-10">
-                  <div className="w-4 h-4 bg-white [clip-path:polygon(100%_0,0_50%,100%_100%)] shrink-0" />
-                  <div className="flex flex-col leading-none">
-                    <span className="font-bold tracking-widest text-xs sm:text-[13px] uppercase text-white font-sans">HARD CALL</span>
-                    <span className="text-[10px] sm:text-[11px] text-[#888888] font-medium tracking-wider uppercase font-sans mt-0.5">sales</span>
-                  </div>
+                  <img
+                    src="/images/logo/hcs-symbol.png"
+                    alt="Hard Call Sales"
+                    className="w-[30px] h-[30px] object-contain brightness-0 invert opacity-95"
+                  />
+                  <img
+                    src="/images/logo/hcs-wordmark.png"
+                    alt="The Hard Call Sales Group"
+                    className="h-[18px] w-auto object-contain brightness-0 invert opacity-95"
+                  />
                 </div>
 
                 {/* Main Heading */}
